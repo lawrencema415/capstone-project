@@ -6,9 +6,15 @@ class NavBar extends Component {
       <div class="navbar">
         <ul>
           <li>Logo</li>
-          <li>Home</li>
-          <li>Search</li>
-          <li>Playlist</li>
+          <li>
+            <button onClick={() => {this.props.changeTab("Home")}}>Home</button>
+          </li>
+          <li>
+            <button onClick={() => {this.props.changeTab("Search")}}>Search</button>
+          </li>
+          <li>
+            <button onClick={() => {this.props.changeTab("Playlist")}}>Playlist</button>
+            </li>
           <li>Log out</li>
           <li>User</li>
         </ul>
