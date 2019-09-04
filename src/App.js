@@ -15,20 +15,10 @@ class App extends Component {
     localStorage.setItem('uid', userId);
   }
 
-  logout = () => {
-    localStorage.removeItem('uid');
-    axios.post(`${API_URL}/auth/logout`, {withCredentials: true})
-    .then(res => {
-      this.setState({ currentUser: null});
-      this.props.history.push('/');
-    })
-    .catch(err => console.log(err));
-  };
-
   render() {
     return (
       <div>
-        <Routes currentUser={this.state.currentUser} setCurrentUser={this.setCurrentUser} />
+        <Routes currentUser={this.state.currentUser} setCurrentUser={this.setCurrentUser}/>
       </div>
     );
   }

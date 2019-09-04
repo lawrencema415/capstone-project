@@ -3,7 +3,7 @@ import './NavBar.css';
 class NavBar extends Component {
   render() {
     return(
-      <div class="navbar">
+      <div className="navbar">
         <ul>
           <li>Logo</li>
           <li>
@@ -15,7 +15,9 @@ class NavBar extends Component {
           <li>
             <button onClick={() => {this.props.changeTab("Playlist")}}>Playlist</button>
             </li>
-          <li>Log out</li>
+          <li>
+            <button onClick={() => {this.props.logout()}}>Logout</button>
+          </li>
           <li>User</li>
         </ul>
       </div>

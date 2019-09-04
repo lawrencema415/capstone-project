@@ -5,10 +5,10 @@ class Search extends Component {
   }
 
   handleChange = (event) => {
-      console.log(event.target.value);
-      console.log(this.props.songs);
-      let filtered = this.props.songs.filter(song => song.name.toLowerCase().includes(event.target.value.toLowerCase()) )
-      this.setState({filter:filtered})
+    console.log(event.target.value);
+    console.log(this.props.songs);
+    let filtered = this.props.songs.filter(song => song.name.toLowerCase().includes(event.target.value.toLowerCase()) )
+    this.setState({filter:filtered})
   };
 
   renderSongs() {
@@ -21,7 +21,7 @@ class Search extends Component {
 
   render() {
     return(
-      <div class="search">
+      <div className="search">
         <input type="text" name="search" onChange={this.handleChange} placeholder="Start typing..."/>
         <section type="songs">
         {this.renderSongs()}

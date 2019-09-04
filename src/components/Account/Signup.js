@@ -22,8 +22,19 @@ class Signup extends Component {
     event.preventDefault();
     const newUser = this.state;
     axios.post(`${API_URL}/auth/register`, newUser)
-    .then(res => console.log(res))
+    .then(res => {
+      axios.post(`${API_URL}/auth/login`, newUser, {withCredentials:true})
+      .then( res => {
+        this.props.setCurrentUser(res.data.id);
+        this.props.history.push('/browse');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    })
     .catch(err => this.setState({error: [err.response.data.message]}));
+
   };
 
 

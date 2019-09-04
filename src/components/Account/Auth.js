@@ -8,7 +8,7 @@ const Auth = props => {
   return (
     <>
       <Login currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} history={props.history}/>
-      <Signup />
+      <Signup currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} history={props.history}/>
     </>
   )
 }
