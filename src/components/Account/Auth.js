@@ -4,10 +4,10 @@ import { API_URL } from '../../constant';
 import Login from './Login';
 import Signup from './Signup';
 
-const Auth = () => {
+const Auth = props => {
   return (
     <>
-      <Login />
+      <Login currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} history={props.history}/>
       <Signup />
     </>
   )
