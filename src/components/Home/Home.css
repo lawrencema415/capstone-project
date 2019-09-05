@@ -1,40 +1,50 @@
-body {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
   font-family: 'Cabin', sans-serif;
+  font-weight: 700;
 }
 
-.container {
-display: grid;
-grid-template-columns: 1fr 5fr;
-grid-template-rows: 1fr 5fr;
 
+.container {
+height: 100vh;
 }
 
 .navbar {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 2;
   background-color: #000000;
-  color: white;
+  opacity: 0.9;
+  width: 230px;
+  position: fixed;
+  color: #ffffff;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  box-sizing: border-box;
+  z-index: 1;
+  line-height: 20px;
+  font-size: 14px;
 }
 
 .content {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  min-height: 100%;
+  padding-bottom: 120px;
+  padding-left: 230px;
+  position: relative;
   text-align: center;
+  background-color: lightgreen;
 }
 
 
 .musicplayer {
-  display: flex;
-  align-items: flex-end;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
+  width: 30%;
+  min-width: 98vw;
+  height: 90px;
+  display:flex;
+  align-items: center;
+  padding: 0 16px;
   text-align: center;
+  color: white;
   background-color: #282828;
-  width: 100%;
 }

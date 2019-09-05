@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-
+import './PlaylistModal.css';
 let modalStyles = {
-  width: '500px',
+  width: '100vw',
   maxWidth:'100%',
   margin:'0 auto',
   position:'fixed',
@@ -26,14 +26,16 @@ let modalCloseButtonStyles = {
 }
 
 class PlaylistModal extends Component {
-  state = {
-    isModalOpen: false
-  }
+
   render() {
       let modal = (
-        <div style={modalStyles}>
-        Add new playlist
-        <button onClick={() => this.setState({isModalOpen:false})} style={modalCloseButtonStyles}> x </button>
+        <div className="modalStyles">
+        <span>&#10005;</span>
+        Create a new playlist
+        <label>Playlist Name</label>
+        <input placeholder="New playlist"/>
+        <button type="button" onClick={() => this.props.closeModal()} style={modalCloseButtonStyles}> Cancel </button>
+        <button type="button" onClick={() => this.props.closeModal()} style={modalCloseButtonStyles}> Create </button>
         </div>
       )
 
@@ -42,7 +44,6 @@ class PlaylistModal extends Component {
       }
     return (
       <div>
-      <button onClick={()=> this.setState({isModalOpen:true})}>Add playlist</button>
         {modal}
       </div>
     )

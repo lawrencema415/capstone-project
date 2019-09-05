@@ -4,7 +4,7 @@ import { API_URL } from '../../constant';
 import NavBar from '../NavBar/NavBar';
 import Playlist from '../Playlist/Playlist';
 import Search from '../Search/Search';
-import MusicPlayer from '../MusicPlayer/MusicPlayer';
+import MusicPlayer from '../MusicContainer/MusicPlayer';
 import './Home.css';
 
 class Home extends Component {
@@ -44,6 +44,7 @@ class Home extends Component {
 
   componentDidMount() {
     const currentUser = localStorage.getItem('uid');
+
     this.setState({currentUser});
     this.getSongs();
   };

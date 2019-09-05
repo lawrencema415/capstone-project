@@ -4,7 +4,8 @@ import { API_URL } from '../../constant';
 import PlaylistModal from '../Modal/PlaylistModal';
 class Playlist extends Component {
   state = {
-    value: ''
+    value: '',
+    isModalOpen: false
   }
 
   handleChange = (event) => {
@@ -22,6 +23,9 @@ class Playlist extends Component {
     }).catch(err => console.log(err));
   }
 
+  closeModal = () => {
+    this.setState({isModalOpen:false});
+  }
 
   render() {
     return(
@@ -29,7 +33,9 @@ class Playlist extends Component {
         Playlist is here!
         <form>
         <input type="text" name="name" onChange={this.handleChange} placeholder="New playlist name.."/>
-        <PlaylistModal/>
+        <button type="button" onClick={()=> this.setState({isModalOpen:true})}>Add playlist</button>
+        <PlaylistModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>
+
         </form>
       </div>
     )

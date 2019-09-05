@@ -1,0 +1,21 @@
+.searchContainer {
+  padding: 12px 0;
+  display: block;
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: gray;
+}
+
+#searchBar {
+  background-color: transparent;
+  font-size: 50px;
+  line-height: 50px;
+  color: white;
+  border: 0;
+  caret-color: darkgreen;
+  margin-bottom: 20px;
+}

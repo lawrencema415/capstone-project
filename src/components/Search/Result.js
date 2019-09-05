@@ -16,7 +16,7 @@ class Result extends Component {
     if (this.props.results.length <= 0) {
       return (
         <>
-        <h2>Search Spotify</h2>
+        <h2>Search Musiq</h2>
         <h3>Find your favorite songs, artists, albums, podcasts and playlists.</h3>
         </>
       )
