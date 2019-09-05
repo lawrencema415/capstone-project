@@ -13,7 +13,6 @@ class Home extends Component {
     songs: [],
     currentUser: null,
     currentTab: "Home",
-    playlists:[],
     albums:[]
   };
 
@@ -26,10 +25,6 @@ class Home extends Component {
     })
     .catch(err => console.log(err));
   };
-
-  updatePlaylist = playlists => {
-    this.setState({playlists})
-  }
 
   updateAlbums = albums => {
     this.setState({albums})
@@ -44,7 +39,6 @@ class Home extends Component {
 
   componentDidMount() {
     const currentUser = localStorage.getItem('uid');
-
     this.setState({currentUser});
     this.getSongs();
   };
@@ -64,7 +58,7 @@ class Home extends Component {
     }
     if(this.state.currentTab === "Playlist") {
       return (
-        <Playlist updatePlaylist={this.updatePlaylist}/>
+        <Playlist />
       )
     }
   }
