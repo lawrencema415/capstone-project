@@ -51,7 +51,9 @@ class Home extends Component {
   renderItem() {
     if(this.state.currentTab === "Home") {
       return (
+        <>
         <h1>Home</h1>
+        </>
       )
     }
     if(this.state.currentTab === "Search") {
@@ -74,9 +76,9 @@ class Home extends Component {
     console.log("render");
     return (
       <div className="container">
-        <NavBar changeTab={this.changeTab} logout={this.logout} />
-        {this.renderItem()}
-        <MusicPlayer />
+        <div className="navbar"> <NavBar changeTab={this.changeTab} logout={this.logout} /> </div>
+        <div className="content"> {this.renderItem()} </div>
+        <div className="musicplayer"> <MusicPlayer /> </div>
       </div>
     );
   };

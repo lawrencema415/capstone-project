@@ -1,0 +1,40 @@
+body {
+  font-family: 'Cabin', sans-serif;
+}
+
+.container {
+display: grid;
+grid-template-columns: 1fr 5fr;
+grid-template-rows: 1fr 5fr;
+
+}
+
+.navbar {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  background-color: #000000;
+  color: white;
+}
+
+.content {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  text-align: center;
+}
+
+
+.musicplayer {
+  display: flex;
+  align-items: flex-end;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  text-align: center;
+  background-color: #282828;
+  width: 100%;
+}

@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import axios from 'axios';
 import { API_URL } from '../../constant';
+import PlaylistModal from '../Modal/PlaylistModal';
 class Playlist extends Component {
   state = {
-    value: '',
+    value: ''
   }
 
   handleChange = (event) => {
@@ -21,13 +22,14 @@ class Playlist extends Component {
     }).catch(err => console.log(err));
   }
 
+
   render() {
     return(
       <div className="playlist">
         Playlist is here!
         <form>
         <input type="text" name="name" onChange={this.handleChange} placeholder="New playlist name.."/>
-        <button type="submit">Add playlist</button>
+        <PlaylistModal/>
         </form>
       </div>
     )
