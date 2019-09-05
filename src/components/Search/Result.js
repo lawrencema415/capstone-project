@@ -1,9 +1,32 @@
 import React, {Component} from 'react'
+import AddSongModal from '../Modal/AddSongModal';
+import axios from 'axios';
+import { API_URL } from '../../constant';
+
 class Result extends Component {
+  state = {
+    isModalOpen:false,
+    playlists:[]
+  }
+
+  componentDidMount() {
+    let uid = localStorage.getItem('uid')
+    axios.get(`${API_URL}/playlist/userPlaylist/${uid}`)
+    .then(res => {
+      console.log(res.data.data);
+      this.setState({playlists:res.data.data});
+    }).catch(err => console.log(err));
+  };
 
   renderSongs() {
     let songs = this.props.results.map( (song,idx) => {
-        return <div id={idx}>{song.name}</div>
+        return (
+          <div id={idx}>
+          <h3>{song.name}</h3>
+          <h4>{song.artist}</h4>
+          <button type="button" onClick={() => this.setState({isModalOpen:true})}>...</button>
+          </div>
+        )
     })
     if (this.props.value !== "" && this.props.found == false) {
       return (
@@ -25,11 +48,15 @@ class Result extends Component {
     return songs;
   }
 
+  closeModal = () => {
+    this.setState({isModalOpen:false});
+  }
 
   render() {
     return(
       <div className="results">
         {this.renderSongs()}
+        <AddSongModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} playlists={this.state.playlists}/>
       </div>
     )
   }

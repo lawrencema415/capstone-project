@@ -47,10 +47,9 @@ let placeholderStyles = {
   caretColor:'green'
 }
 
-class PlaylistModal extends Component {
+class AddSongModal extends Component {
   state = {
-    name:'',
-    user: ''
+    song:null
   }
 
   componentWillMount() {
@@ -66,7 +65,7 @@ class PlaylistModal extends Component {
     if(this.node && this.node.contains(e.target)) {
       return ;
     }
-    this.props.closeModal()
+    this.props.closeModal();
   }
 
   handleChange = (event) => {
@@ -80,15 +79,21 @@ class PlaylistModal extends Component {
     this.props.closeModal();
   }
 
+  renderPlaylists = playlists => {
+    let options = playlists.map( playlist => {
+      return (
+        <button type="button"> {playlist.name} </button>
+      )
+    })
+    return options;
+  }
+
   render() {
       let modal = (
         <div style={modalStyles} ref={node => this.node = node}>
-        <span>&#10005;</span>
-        <label style={label1Styles}>Create a new playlist</label>
-        <form>
-        <input type="text" name="name" onChange={this.handleChange} style={placeholderStyles} placeholder="New playlist"/>
-        <button type="submit" onClick={this.handleSubmit} style={modalCloseButtonStyles}> Create </button>
-        </form>
+        <span onClick={() => this.props.closeModal()}>&#10005;</span>
+        <label style={label1Styles}>Add to playlist</label>
+        {this.renderPlaylists(this.props.playlists)}
         <button type="button" onClick={() => this.props.closeModal()} style={modalCloseButtonStyles}> Cancel </button>
         </div>
       )
@@ -104,4 +109,4 @@ class PlaylistModal extends Component {
   }
 };
 
-export default PlaylistModal;
+export default AddSongModal;

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { API_URL } from '../../constant';
 import NavBar from '../NavBar/NavBar';
-import Playlist from '../Playlist/Playlist';
+import PlaylistContainer from '../Playlist/PlaylistContainer';
 import Search from '../Search/Search';
 import MusicPlayer from '../MusicContainer/MusicPlayer';
 import './Home.css';
@@ -58,7 +58,7 @@ class Home extends Component {
     }
     if(this.state.currentTab === "Playlist") {
       return (
-        <Playlist />
+        <PlaylistContainer />
       )
     }
   }

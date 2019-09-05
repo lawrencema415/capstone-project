@@ -21,14 +21,6 @@ class Search extends Component {
 
   };
 
-  renderSongs() {
-    let songs = this.state.filter.map( song => {
-        return <div id={song._id}>{song.name}</div>
-    })
-
-    return songs;
-  }
-
   render() {
     return(
       <div className="searchContainer">
