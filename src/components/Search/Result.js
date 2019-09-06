@@ -6,7 +6,8 @@ import { API_URL } from '../../constant';
 class Result extends Component {
   state = {
     isModalOpen:false,
-    playlists:[]
+    playlists:[],
+    selectedSong:null
   }
 
   componentDidMount() {
@@ -19,12 +20,12 @@ class Result extends Component {
   };
 
   renderSongs() {
-    let songs = this.props.results.map( (song,idx) => {
+    let songs = this.props.results.map( song => {
         return (
-          <div id={idx}>
+          <div key={song._id}>
           <h3>{song.name}</h3>
           <h4>{song.artist}</h4>
-          <button type="button" onClick={() => this.setState({isModalOpen:true})}>...</button>
+          <button type="button" onClick={() => {this.setState({isModalOpen:true,selectedSong:song})}}>...</button>
           </div>
         )
     })
@@ -52,11 +53,18 @@ class Result extends Component {
     this.setState({isModalOpen:false});
   }
 
+  addSong = (playlist,song) => {
+    axios.put(`${API_URL}/playlist/addSong/${playlist}`,song)
+    .then(res => {
+      console.log(res.data.data);
+    }).catch(err => console.log(err));
+  }
+
   render() {
     return(
       <div className="results">
         {this.renderSongs()}
-        <AddSongModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} playlists={this.state.playlists}/>
+        <AddSongModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} selectedSong={this.state.selectedSong} addSong={this.addSong} songs={this.props.results} playlists={this.state.playlists}/>
       </div>
     )
   }

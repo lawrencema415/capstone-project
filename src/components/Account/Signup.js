@@ -46,7 +46,7 @@ class Signup extends Component {
           <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" />
           <input type="password" id="password2" name="password2" value={this.state.password2} onChange={this.handleChange} placeholder="Confirm password" />
           <input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange} placeholder="What should we call you?" />
-          <input type="text" id="birthday" name="birthday" value={this.state.birthday} onChange={this.handleChange} placeholder="birthday" />
+          <input type="date" id="birthday" name="birthday" value={this.state.birthday} onChange={this.handleChange} placeholder="birthday" />
           <button type="submit">Sign up</button>
         </form>
         <h3>Already have an account? <a href="#">Log In</a></h3>

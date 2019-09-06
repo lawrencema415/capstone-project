@@ -31,13 +31,23 @@ class PlaylistContainer extends Component {
     }).catch(err => console.log(err));
   }
 
+  removePlaylist = (id) => {
+    axios.delete(`${API_URL}/playlist/delete/${id}`)
+    .then(res => {
+      console.log(res.data.data)
+      let playlists = this.state.playlists.filter( playlist => playlist._id !== res.data.data._id)
+      console.log("deleted a playlist");
+      this.setState({playlists});
+    }).catch(err => console.log(err));
+  }
+
   render() {
     return(
       <div className="playlist">
         <h1>Playlist</h1>
         <PlaylistModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} createPlaylist={this.createPlaylist}/>
         <button type="button" onClick={()=> this.setState({isModalOpen:true})}>Add playlist</button>
-        <Playlists playlists={this.state.playlists}/>
+        <Playlists playlists={this.state.playlists} removePlaylist={this.removePlaylist}/>
       </div>
     )
   }

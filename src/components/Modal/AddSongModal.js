@@ -48,9 +48,6 @@ let placeholderStyles = {
 }
 
 class AddSongModal extends Component {
-  state = {
-    song:null
-  }
 
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClick, false);
@@ -82,7 +79,13 @@ class AddSongModal extends Component {
   renderPlaylists = playlists => {
     let options = playlists.map( playlist => {
       return (
-        <button type="button"> {playlist.name} </button>
+        <button type="button" onClick={() => {
+            this.props.addSong(playlist._id,this.props.selectedSong);
+            this.props.closeModal();
+          }
+        }>
+           {playlist.name}
+        </button>
       )
     })
     return options;
@@ -91,10 +94,10 @@ class AddSongModal extends Component {
   render() {
       let modal = (
         <div style={modalStyles} ref={node => this.node = node}>
-        <span onClick={() => this.props.closeModal()}>&#10005;</span>
-        <label style={label1Styles}>Add to playlist</label>
-        {this.renderPlaylists(this.props.playlists)}
-        <button type="button" onClick={() => this.props.closeModal()} style={modalCloseButtonStyles}> Cancel </button>
+          <span onClick={() => this.props.closeModal()}>&#10005;</span>
+          <label style={label1Styles}>Add to playlist</label>
+          {this.renderPlaylists(this.props.playlists)}
+          <button type="button" onClick={() => this.props.closeModal()} style={modalCloseButtonStyles}> Cancel </button>
         </div>
       )
 

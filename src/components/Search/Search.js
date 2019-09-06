@@ -10,7 +10,7 @@ class Search extends Component {
 
   handleChange = (event) => {
     if(event.target.value.length >= 2) {
-      let filtered = this.props.songs.filter(song => song.name.toLowerCase().includes(event.target.value.toLowerCase()) )
+      let filtered = this.props.songs.filter(song => song.name.toLowerCase().includes(event.target.value.toLowerCase()) || song.artist.toLowerCase().includes(event.target.value.toLowerCase()))
       this.setState({filter:filtered,value:event.target.value})
       if(filtered.length > 0) {
         this.setState({found:true})
