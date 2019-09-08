@@ -1,17 +1,16 @@
 .searchContainer {
-  padding: 12px 0;
   display: block;
-  background-color: #282828;
 }
 
 .searchBar {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  background-color: gray;
+  background-color: #282828 !important;
 }
 
 #searchBar {
+  padding: 12px 0;
   background-color: transparent;
   font-size: 50px;
   line-height: 50px;
@@ -23,4 +22,5 @@
 
 .results {
   color: #fff;
+  background-color: transparent;
 }

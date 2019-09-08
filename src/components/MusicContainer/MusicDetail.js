@@ -1,9 +1,12 @@
 import React from 'react';
 
+
+
 const MusicDetail = props => {
   return (
     <>
-    Detail
+    <img src={props.currentSongImg}/>
+    {props.currentSongName}
     </>
   )
 }

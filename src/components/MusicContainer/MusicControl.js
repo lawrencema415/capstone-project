@@ -10,7 +10,8 @@ class MusicControl extends Component {
       progress:0,
       dragProgressBar:false,
       loop:false,
-      volume: 100
+      volume: 1,
+      isMuted: false
     }
     this.progressInChange =  false;
     this.interval = setInterval(this.update,1000);
@@ -32,6 +33,10 @@ class MusicControl extends Component {
 
   togglePlay = () => {
     this.state.isPlaying ? this.setState({isPlaying:false}) : this.setState({isPlaying:true});
+  }
+
+  toggleMute = () => {
+    this.state.isMuted ? this.setState({isMuted:false}) : this.setState({isMuted:true});
   }
 
   progressBarActivate = e => {
@@ -57,9 +62,11 @@ class MusicControl extends Component {
     if(this.refs.player) {
       let player = this.refs.player;
       player.loop = this.state.loop;
+
       if(player.currentSrc !== this.props.currentSong) {
         player.src = this.props.currentSong;
       }
+
       if(player.paused && !player.ended) {
         if(this.state.isPlaying) {
           player.play();
@@ -67,6 +74,13 @@ class MusicControl extends Component {
       } else if (!this.state.isPlaying) {
         player.pause();
       }
+
+      if(this.state.isMuted) {
+        player.volume = 0;
+      } else {
+        player.volume = this.state.volume;
+      }
+
       if(this.progressInChange) {
         this.progressInChange = false;
         player.currentTime = player.duration * this.state.progress;
@@ -81,12 +95,19 @@ class MusicControl extends Component {
       "fa fa-play": !this.state.isPlaying,
       "fa fa-pause": this.state.isPlaying
     };
+
+    let muteClassName = {
+        "fa fa-volume-up": !this.state.isMuted,
+        "fa fa-volume-off": this.state.isMuted
+    }
+
     return (
       <div className="player">
         <div className="audio-controls">
           <a onClick={() => {}}><i className="fa fa-chevron-left" aria-hidden="true"></i></a>
-          <a onClick={this.togglePlay}><i className={togglePlayButton(playerClassName)} aria-hidden="true"></i></a>
+          <a onClick={this.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
           <a onClick={() => {}}><i className="fa fa-chevron-right" aria-hidden="true"></i></a>
+
           <div className="timeStamp"> {convertTime(currentTime)} / {convertTime(totalTime)} </div>
         </div>
         <div className="progress" onMouseDown={this.progressBarActivate} onMouseMove={this.setTime} onMouseLeave={() => this.setState({dragProgressBar:false})} onMouseUp={this.stopDrag}>
@@ -98,12 +119,14 @@ class MusicControl extends Component {
           <source src={this.props.currentSong}/>
         </audio>
 
+        <a onClick={this.toggleMute}><i className={toggleClassName(muteClassName)} aria-hidden="true"></i></a>
+
       </div>
     );
   }
 };
 
-function togglePlayButton(obj) {
+function toggleClassName(obj) {
   let css = [];
   Object.keys(obj).forEach(key => obj[key] && css.push(key));
   return css.join('');
@@ -115,13 +138,18 @@ function convertTime(time) {
   }
   let minutes = Math.floor(time % 3600 / 60);
   let seconds = Math.floor(time % 3600 % 60);
+  if(seconds < 10) {
+    seconds = "0" + seconds
+  }
 
   return minutes + ":" + seconds;
 }
 
+// Patrick Lorio youtube tutorial
 function offsetLeftConvert(ele) {
   let left = 0;
   while(ele && ele !== document) {
+    console.log(document);
     left += ele.offsetLeft;
     ele = ele.offsetParent;
   }

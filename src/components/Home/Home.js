@@ -14,7 +14,9 @@ class Home extends Component {
     currentUser: null,
     currentTab: "Home",
     albums: [],
-    currentSong: "https://spotify-clone.s3-us-west-1.amazonaws.com/Ozuna+-+Aura/03.+Vaina+Loca+(Ft.+Manuel+Turizo).mp3",
+    currentSong:"https://spotify-clone.s3-us-west-1.amazonaws.com/Illenium+-+Ashes/03-With+You+(feat.+Quinn+XCII).mp3",
+    currentSongImg:"https://spotify-clone.s3-us-west-1.amazonaws.com/Ozuna+-+Aura/Front+Cover.jpg",
+    currentSongName:"With You"
   };
 
   logout = () => {
@@ -78,7 +80,7 @@ class Home extends Component {
       <div className="container">
         <div className="navbar"> <NavBar changeTab={this.changeTab} logout={this.logout} /> </div>
         <div className="content"> {this.renderItem()} </div>
-        <div className="music-control-container"> <MusicPlayerContainer currentSong={this.state.currentSong}/> </div>
+        <div className="music-control-container"> <MusicPlayerContainer currentSong={this.state.currentSong} currentSongImg={this.state.currentSongImg} currentSongName={this.state.currentSongName}/> </div>
       </div>
     );
   };
