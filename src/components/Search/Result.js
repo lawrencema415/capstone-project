@@ -26,6 +26,7 @@ class Result extends Component {
           <h3>{song.name}</h3>
           <h4>{song.artist}</h4>
           <button type="button" onClick={() => {this.setState({isModalOpen:true,selectedSong:song})}}>...</button>
+          <button type="button" onClick={() => this.props.setCurrentSong(song.url)}>Play</button>
           </div>
         )
     })

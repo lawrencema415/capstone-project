@@ -1,6 +1,7 @@
 .searchContainer {
   padding: 12px 0;
   display: block;
+  background-color: #282828;
 }
 
 .searchBar {
@@ -18,4 +19,8 @@
   border: 0;
   caret-color: darkgreen;
   margin-bottom: 20px;
+}
+
+.results {
+  color: #fff;
 }

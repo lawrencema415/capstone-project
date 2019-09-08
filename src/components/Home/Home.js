@@ -4,7 +4,7 @@ import { API_URL } from '../../constant';
 import NavBar from '../NavBar/NavBar';
 import PlaylistContainer from '../Playlist/PlaylistContainer';
 import Search from '../Search/Search';
-import MusicPlayer from '../MusicContainer/MusicPlayer';
+import MusicPlayerContainer from '../MusicContainer/MusicPlayerContainer';
 import './Home.css';
 
 class Home extends Component {
@@ -13,7 +13,8 @@ class Home extends Component {
     songs: [],
     currentUser: null,
     currentTab: "Home",
-    albums:[]
+    albums: [],
+    currentSong: "https://spotify-clone.s3-us-west-1.amazonaws.com/Ozuna+-+Aura/03.+Vaina+Loca+(Ft.+Manuel+Turizo).mp3",
   };
 
   logout = () => {
@@ -37,6 +38,10 @@ class Home extends Component {
     }).catch(err => console.log(err));
   }
 
+  setCurrentSong = song => {
+    this.setState({currentSong:song});
+  }
+
   componentDidMount() {
     const currentUser = localStorage.getItem('uid');
     this.setState({currentUser});
@@ -53,12 +58,12 @@ class Home extends Component {
     }
     if(this.state.currentTab === "Search") {
       return (
-        <Search songs={this.state.songs}/>
+        <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong}/>
       )
     }
     if(this.state.currentTab === "Playlist") {
       return (
-        <PlaylistContainer />
+        <PlaylistContainer setCurrentSong={this.setCurrentSong}/>
       )
     }
   }
@@ -73,7 +78,7 @@ class Home extends Component {
       <div className="container">
         <div className="navbar"> <NavBar changeTab={this.changeTab} logout={this.logout} /> </div>
         <div className="content"> {this.renderItem()} </div>
-        <div className="musicplayer"> <MusicPlayer /> </div>
+        <div className="music-control-container"> <MusicPlayerContainer currentSong={this.state.currentSong}/> </div>
       </div>
     );
   };

@@ -18,17 +18,16 @@ class Search extends Component {
         this.setState({found:false})
       }
     }
-
   };
 
   render() {
     return(
       <div className="searchContainer">
         <div className="searchbar">
-        <input id="searchBar" type="text" name="search" onChange={this.handleChange} placeholder="Start typing..."/>
+        <input autoFocus id="searchBar" type="text" name="search" onChange={this.handleChange} placeholder="Start typing..."/>
         </div>
-        <section type="songs">
-        <Result results={this.state.filter} value={this.state.value} found={this.state.found}/>
+        <section type="results">
+        <Result results={this.state.filter} value={this.state.value} found={this.state.found} setCurrentSong={this.props.setCurrentSong}/>
         </section>
       </div>
     )
