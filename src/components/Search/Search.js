@@ -27,7 +27,9 @@ class Search extends Component {
         <input autoFocus id="searchBar" type="text" name="search" onChange={this.handleChange} placeholder="Start typing..."/>
         </div>
         <section type="results">
-        <Result results={this.state.filter} value={this.state.value} found={this.state.found} setCurrentSong={this.props.setCurrentSong}/>
+        <Result results={this.state.filter} value={this.state.value} found={this.state.found} setCurrentSong={this.props.setCurrentSong}
+          setCurrentSongImg={this.props.setCurrentSongImg}
+          setCurrentSongName={this.props.setCurrentSongName}/>
         </section>
       </div>
     )

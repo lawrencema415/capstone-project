@@ -108,7 +108,7 @@ class MusicControl extends Component {
           <a onClick={this.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
           <a onClick={() => {}}><i className="fa fa-chevron-right" aria-hidden="true"></i></a>
 
-          <div className="timeStamp"> {convertTime(currentTime)} / {convertTime(totalTime)} </div>
+          <div className="timeStamp" > {timeString(currentTime,totalTime)}</div>
         </div>
         <div className="progress" onMouseDown={this.progressBarActivate} onMouseMove={this.setTime} onMouseLeave={() => this.setState({dragProgressBar:false})} onMouseUp={this.stopDrag}>
           <div ref="progress_bar" className="bar">
@@ -144,6 +144,15 @@ function convertTime(time) {
 
   return minutes + ":" + seconds;
 }
+
+function timeString(currentTime,totalTime) {
+  if(convertTime(currentTime) == "") {
+    return ""
+  }
+  return convertTime(currentTime) + " : " + convertTime(totalTime);
+}
+
+
 
 // Patrick Lorio youtube tutorial
 function offsetLeftConvert(ele) {

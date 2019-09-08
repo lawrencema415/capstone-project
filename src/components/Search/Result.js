@@ -27,9 +27,11 @@ class Result extends Component {
           <h4>{song.artist}</h4>
           <button type="button" onClick={() => {this.setState({isModalOpen:true,selectedSong:song})}}>...</button>
           <button type="button" onClick={() => {
-              this.setState({selectedSong:song})
-              this.props.setCurrentSong(song.url)}
-            }>
+              this.setState({selectedSong:song});
+              this.props.setCurrentSong(song.url);
+              this.props.setCurrentSongImg(song.picture);
+              this.props.setCurrentSongName(song.name);
+            }}>
             Play
           </button>
           </div>
@@ -70,7 +72,10 @@ class Result extends Component {
     return(
       <div className="results">
         {this.renderSongs()}
-        <AddSongModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} selectedSong={this.state.selectedSong} addSong={this.addSong} songs={this.props.results} playlists={this.state.playlists}/>
+        <AddSongModal
+          closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} selectedSong={this.state.selectedSong}
+          addSong={this.addSong} songs={this.props.results} playlists={this.state.playlists}
+        />
       </div>
     )
   }

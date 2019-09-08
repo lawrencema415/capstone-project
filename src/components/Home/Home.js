@@ -40,8 +40,15 @@ class Home extends Component {
     }).catch(err => console.log(err));
   }
 
+// Temp set song descriptions, need to change later
   setCurrentSong = song => {
     this.setState({currentSong:song});
+  }
+  setCurrentSongImg = img => {
+    this.setState({currentSongImg:img});
+  }
+  setCurrentSongName = name => {
+    this.setState({currentSongName:name});
   }
 
   componentDidMount() {
@@ -60,7 +67,7 @@ class Home extends Component {
     }
     if(this.state.currentTab === "Search") {
       return (
-        <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong}/>
+        <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong} setCurrentSongImg={this.setCurrentSongImg} setCurrentSongName={this.setCurrentSongName}/>
       )
     }
     if(this.state.currentTab === "Playlist") {
@@ -80,7 +87,12 @@ class Home extends Component {
       <div className="container">
         <div className="navbar"> <NavBar changeTab={this.changeTab} logout={this.logout} /> </div>
         <div className="content"> {this.renderItem()} </div>
-        <div className="music-control-container"> <MusicPlayerContainer currentSong={this.state.currentSong} currentSongImg={this.state.currentSongImg} currentSongName={this.state.currentSongName}/> </div>
+        <div className="music-control-container">
+          <MusicPlayerContainer
+            currentSong={this.state.currentSong} currentSongImg={this.state.currentSongImg}
+            currentSongName={this.state.currentSongName}
+          />
+        </div>
       </div>
     );
   };
