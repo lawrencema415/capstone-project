@@ -40,7 +40,9 @@
 }
 
 .audio-controls {
-  float:left
+  float:left;
+  display:inline-block;
+
 }
 
 .progress {
@@ -52,6 +54,9 @@
   background: #404040;
   padding: 0 5px;
   cursor: pointer;
+  height: 5px;
+  border-radius: 500px;
+  width: 640px;
 }
 
 .progress > .bar {
@@ -71,6 +76,8 @@
   font-size: 10px;
   text-align:center;
   background: #B3B3B3;
+  height: 5px;
+  border-radius: 500px;
 }
 
 .progress > .bar > div:hover {
@@ -87,4 +94,14 @@
 
 .pic img:hover {
   cursor: pointer;
+}
+
+.details {
+  color:white;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.details h5 {
+  color:gray;
 }

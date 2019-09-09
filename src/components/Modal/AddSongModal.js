@@ -27,7 +27,7 @@ let modalCloseButtonStyles = {
   lineHeight:'18px',
   color:'white',
   fontWeight:'400px',
-  borderRadius:'0.3em'
+  borderRadius:'0.3em',
 }
 
 let label1Styles = {

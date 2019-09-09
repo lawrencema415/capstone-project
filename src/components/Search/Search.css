@@ -2,18 +2,16 @@
   display: block;
 }
 
-.searchBar {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  background-color: #282828 !important;
+.searchbar {
+  background-color:#282828;
+  color: #535353;
 }
 
 #searchBar {
-  padding: 12px 0;
+  padding-top: 10px;
   background-color: transparent;
-  font-size: 50px;
-  line-height: 50px;
+  font-size: 40px;
+  line-height: 40px;
   color: white;
   border: 0;
   caret-color: darkgreen;
@@ -23,4 +21,11 @@
 .results {
   color: #fff;
   background-color: transparent;
+}
+
+.description {
+  padding-top: 70px;
+}
+.description h3 {
+  color: gray;
 }

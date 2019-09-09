@@ -8,11 +8,9 @@ class MusicPlayerContainer extends Component {
 
     return(
       <>
-        <>
-          <div className="pic"> <MusicDetail currentSongImg={this.props.currentSongImg} currentSongName={this.props.currentSongName}/> </div>
-          <MusicControl currentSong={this.props.currentSong} />
-          <div className="audio"> <VolumeControl /> </div>
-        </>
+        <div className="pic"> <MusicDetail currentSongImg={this.props.currentSongImg} currentSongName={this.props.currentSongName}/> </div>
+        <MusicControl currentSong={this.props.currentSong} />
+        <div className="controllers"> <VolumeControl /> </div>
       </>
     )
   }

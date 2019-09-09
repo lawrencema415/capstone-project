@@ -63,8 +63,8 @@
 /* playlist card styles */
 .playlist-card {
   display: inline-block;
-  height: 225px;
-  width: 225px;
+  height: 14.0625rem;
+  width: 14.0625rem;
 }
 
 .playlist-card img {

@@ -1,5 +1,6 @@
-.playlist {
+.playlistContainer {
   color: white;
+  margin: 0 130px;
 }
 
 button {
@@ -20,9 +21,13 @@ button:hover {
 }
 
 .img-container img {
-  height: 225px;
-  width: 225px;
+  height: 14.0625rem;
+  width: 14.0625rem;
   padding: 10px;
+}
+
+.playlists {
+  text-align: left;
 }
 
 .img-container i {

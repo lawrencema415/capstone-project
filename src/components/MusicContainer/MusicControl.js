@@ -26,7 +26,7 @@ class MusicControl extends Component {
         });
       }
     }
-    if(player.ended) {
+    if( player && player.ended) {
 
     }
   }
@@ -92,8 +92,8 @@ class MusicControl extends Component {
     }
 
     let playerClassName = {
-      "fa fa-play-circle-o": !this.state.isPlaying,
-      "fa fa-pause-circle-o": this.state.isPlaying
+      "fa fa-play": !this.state.isPlaying,
+      "fa fa-pause": this.state.isPlaying
     };
 
     let muteClassName = {
@@ -103,6 +103,7 @@ class MusicControl extends Component {
 
     return (
       <div className="player">
+
         <div className="audio-controls">
           <a onClick={() => {}}><i className="fa fa-step-backward" aria-hidden="true"></i></a>
           <a id="playButton" onClick={this.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
@@ -155,7 +156,6 @@ function timeString(currentTime,totalTime) {
 function offsetLeftConvert(ele) {
   let left = 0;
   while(ele && ele !== document) {
-    console.log(document);
     left += ele.offsetLeft;
     ele = ele.offsetParent;
   }

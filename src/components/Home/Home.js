@@ -14,9 +14,9 @@ class Home extends Component {
     currentUser: null,
     currentTab: "Home",
     albums: [],
-    currentSong:"https://spotify-clone.s3-us-west-1.amazonaws.com/Illenium+-+Ashes/03-With+You+(feat.+Quinn+XCII).mp3",
-    currentSongImg:"https://spotify-clone.s3-us-west-1.amazonaws.com/Ozuna+-+Aura/Front+Cover.jpg",
-    currentSongName:"With You"
+    currentSong:"",
+    currentSongImg:"",
+    currentSongName:""
   };
 
   logout = () => {

@@ -43,11 +43,13 @@ class PlaylistContainer extends Component {
 
   render() {
     return(
-      <div className="playlist">
+      <div className="playlistContainer">
         <h1>Playlist</h1>
         <button type="button" onClick={()=> this.setState({isModalOpen:true})}> <i class="fa fa-plus-square-o" aria-hidden="true"></i> Add playlist</button>
         <PlaylistModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} createPlaylist={this.createPlaylist}/>
-        <Playlists playlists={this.state.playlists} removePlaylist={this.removePlaylist}/>
+        <div className="playlists">
+          <Playlists playlists={this.state.playlists} removePlaylist={this.removePlaylist}/>
+        </div>
       </div>
     )
   }

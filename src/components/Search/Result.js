@@ -39,18 +39,18 @@ class Result extends Component {
     })
     if (this.props.value !== "" && this.props.found == false) {
       return (
-        <>
+        <div className="description">
           <h2>No result found for "{this.props.value}"</h2>
           <h3>Please make sure your words are spelled correctly or use less or different keywords.</h3>
-        </>
+        </div>
       )
     }
     if (this.props.results.length <= 0) {
       return (
-        <>
+        <div className="description">
         <h2>Search Musiq</h2>
-        <h3>Find your favorite songs, artists, albums, podcasts and playlists.</h3>
-        </>
+        <h3>Find your favorite songs, artists, albums and playlists.</h3>
+        </div>
       )
     }
 

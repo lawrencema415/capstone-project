@@ -24,7 +24,7 @@ class Search extends Component {
     return(
       <div className="searchContainer">
         <div className="searchbar">
-        <input autoFocus id="searchBar" type="text" name="search" onChange={this.handleChange} placeholder="Start typing..."/>
+        <input autoFocus id="searchBar" type="text" size="70" name="search" onChange={this.handleChange} placeholder="Start typing..."/>
         </div>
         <section type="results">
         <Result results={this.state.filter} value={this.state.value} found={this.state.found} setCurrentSong={this.props.setCurrentSong}
