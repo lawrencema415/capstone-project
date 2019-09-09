@@ -3,8 +3,8 @@ import './MusicControl.css';
 
 
 class MusicControl extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isPlaying:false,
       progress:0,
@@ -14,7 +14,7 @@ class MusicControl extends Component {
       isMuted: false
     }
     this.progressInChange =  false;
-    this.interval = setInterval(this.update,1000);
+    this.interval = setInterval(this.update,500);
   }
 
   update = () => {
@@ -92,22 +92,21 @@ class MusicControl extends Component {
     }
 
     let playerClassName = {
-      "fa fa-play": !this.state.isPlaying,
-      "fa fa-pause": this.state.isPlaying
+      "fa fa-play-circle-o": !this.state.isPlaying,
+      "fa fa-pause-circle-o": this.state.isPlaying
     };
 
     let muteClassName = {
-        "fa fa-volume-up": !this.state.isMuted,
-        "fa fa-volume-off": this.state.isMuted
+      "fa fa-volume-up": !this.state.isMuted,
+      "fa fa-volume-off": this.state.isMuted
     }
 
     return (
       <div className="player">
         <div className="audio-controls">
-          <a onClick={() => {}}><i className="fa fa-chevron-left" aria-hidden="true"></i></a>
-          <a onClick={this.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
-          <a onClick={() => {}}><i className="fa fa-chevron-right" aria-hidden="true"></i></a>
-
+          <a onClick={() => {}}><i className="fa fa-step-backward" aria-hidden="true"></i></a>
+          <a id="playButton" onClick={this.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
+          <a onClick={() => {}}><i className="fa fa-step-forward" aria-hidden="true"></i></a>
           <div className="timeStamp" > {timeString(currentTime,totalTime)}</div>
         </div>
         <div className="progress" onMouseDown={this.progressBarActivate} onMouseMove={this.setTime} onMouseLeave={() => this.setState({dragProgressBar:false})} onMouseUp={this.stopDrag}>
@@ -115,12 +114,10 @@ class MusicControl extends Component {
           <div style={{width: (this.state.progress * 100) + "%" }}></div>
           </div>
         </div>
-        <audio ref="player" autoplay={this.state.isPlaying}>
+        <audio ref="player" autoPlay={this.state.isPlaying}>
           <source src={this.props.currentSong}/>
         </audio>
-
         <a onClick={this.toggleMute}><i className={toggleClassName(muteClassName)} aria-hidden="true"></i></a>
-
       </div>
     );
   }

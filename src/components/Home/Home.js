@@ -29,14 +29,21 @@ class Home extends Component {
     .catch(err => console.log(err));
   };
 
-  updateAlbums = albums => {
-    this.setState({albums})
-  }
-
-  getSongs = () => {
+  getData = () => {
     axios.get(`${API_URL}/song/index`)
     .then(res => {
       this.setState({songs:res.data.data})
+    }).catch(err => console.log(err));
+
+    axios.get(`${API_URL}/album/index`)
+    .then(res => {
+      this.setState({albums:res.data.data})
+    }).catch(err => console.log(err));
+  }
+  getUserInfo = id => {
+    axios.get(`${API_URL}/auth/show/${id}`)
+    .then(res => {
+      this.setState({currentUser:res.data.data})
     }).catch(err => console.log(err));
   }
 
@@ -53,21 +60,21 @@ class Home extends Component {
 
   componentDidMount() {
     const currentUser = localStorage.getItem('uid');
-    this.setState({currentUser});
-    this.getSongs();
+    this.getUserInfo(currentUser);
+    this.getData();
   };
 
   renderItem() {
     if(this.state.currentTab === "Home") {
       return (
         <>
-        <h1>Home</h1>
+        <h1>Top hits</h1>
         </>
       )
     }
     if(this.state.currentTab === "Search") {
       return (
-        <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong} setCurrentSongImg={this.setCurrentSongImg} setCurrentSongName={this.setCurrentSongName}/>
+        <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong} setCurrentSongImg={this.setCurrentSongImg} setCurrentSongName={this.setCurrentSongName} />
       )
     }
     if(this.state.currentTab === "Playlist") {
@@ -85,7 +92,7 @@ class Home extends Component {
     console.log("render");
     return (
       <div className="container">
-        <div className="navbar"> <NavBar changeTab={this.changeTab} logout={this.logout} /> </div>
+        <div className="navbar"> <NavBar changeTab={this.changeTab} logout={this.logout} currentUser={this.state.currentUser}/> </div>
         <div className="content"> {this.renderItem()} </div>
         <div className="music-control-container">
           <MusicPlayerContainer

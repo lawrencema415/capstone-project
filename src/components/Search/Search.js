@@ -28,7 +28,7 @@ class Search extends Component {
         </div>
         <section type="results">
         <Result results={this.state.filter} value={this.state.value} found={this.state.found} setCurrentSong={this.props.setCurrentSong}
-          setCurrentSongImg={this.props.setCurrentSongImg}
+          setCurrentSongImg={this.props.setCurrentSongImg} setPlayNext={this.props.setPlayNext}
           setCurrentSongName={this.props.setCurrentSongName}/>
         </section>
       </div>

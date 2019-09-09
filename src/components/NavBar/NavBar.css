@@ -16,12 +16,17 @@
   color: white;
   opacity: 0.6;
   text-align: left;
-  padding: 10px 0 10px 20px;
+  padding: 10px 0 10px 10px;
+  margin: 0 20px;
 }
 
 .nav i {
   font-size: 25px;
   padding-right: 5px;
+}
+
+li {
+  list-style-type: none;
 }
 
 li:hover {
@@ -32,4 +37,19 @@ li:hover {
 
 li:active {
   border-left:4px solid #1DB954;
+}
+
+.line-break {
+  margin: 0 20px;
+  height:1px;
+  background-color:white;
+}
+
+.top-nav {
+  justify-content: flex-start;
+}
+
+.bot-nav {
+  text-align: center;
+  justify-content: flex-end;
 }

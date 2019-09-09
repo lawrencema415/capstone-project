@@ -64,7 +64,6 @@ class Result extends Component {
   addSong = (playlist,song) => {
     axios.put(`${API_URL}/playlist/addSong/${playlist}`,song)
     .then(res => {
-      console.log(res.data.data);
     }).catch(err => console.log(err));
   }
 

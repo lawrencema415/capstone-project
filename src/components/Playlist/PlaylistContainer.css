@@ -1,0 +1,44 @@
+.playlist {
+  color: white;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  opacity: 0.6;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+.img-container {
+  position: relative;
+}
+
+.img-container img {
+  height: 225px;
+  width: 225px;
+  padding: 10px;
+}
+
+.img-container i {
+  font-size: 80px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* hover not working  */
+.img-container img:hover i {
+  opacity: 1;
+}

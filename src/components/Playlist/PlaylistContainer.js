@@ -3,6 +3,7 @@ import axios from 'axios';
 import { API_URL } from '../../constant';
 import PlaylistModal from '../Modal/PlaylistModal';
 import Playlists from './Playlists';
+import './PlaylistContainer.css'
 class PlaylistContainer extends Component {
   state = {
     value: '',
@@ -13,7 +14,6 @@ class PlaylistContainer extends Component {
   componentDidMount() {
     axios.get(`${API_URL}/playlist/index`)
     .then(res => {
-      console.log(res.data.data);
       this.setState({playlists:res.data.data})
     }).catch(err => console.log(err));
   }
@@ -45,8 +45,8 @@ class PlaylistContainer extends Component {
     return(
       <div className="playlist">
         <h1>Playlist</h1>
+        <button type="button" onClick={()=> this.setState({isModalOpen:true})}> <i class="fa fa-plus-square-o" aria-hidden="true"></i> Add playlist</button>
         <PlaylistModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} createPlaylist={this.createPlaylist}/>
-        <button type="button" onClick={()=> this.setState({isModalOpen:true})}>Add playlist</button>
         <Playlists playlists={this.state.playlists} removePlaylist={this.removePlaylist}/>
       </div>
     )

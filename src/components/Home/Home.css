@@ -10,6 +10,7 @@
 
 .container {
   height: 100vh;
+  color: white;
 }
 
 .navbar {
@@ -34,7 +35,7 @@
   padding-left: 230px;
   position: relative;
   text-align: center;
-  background: linear-gradient(120deg, #5e1db9, #191414);
+  background: linear-gradient(120deg, black, #191414);
   overflow: auto;
 }
 
@@ -53,6 +54,10 @@
   justify-content: space-between;
   align-items: center;
   bottom:0;
+}
+
+*:focus {
+    outline: none;
 }
 
 /* playlist card styles */
