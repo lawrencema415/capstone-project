@@ -4,6 +4,7 @@ import { API_URL } from '../../constant';
 import PlaylistModal from '../Modal/PlaylistModal';
 import Playlists from './Playlists';
 import './PlaylistContainer.css'
+
 class PlaylistContainer extends Component {
   state = {
     value: '',
@@ -34,9 +35,7 @@ class PlaylistContainer extends Component {
   removePlaylist = (id) => {
     axios.delete(`${API_URL}/playlist/delete/${id}`)
     .then(res => {
-      console.log(res.data.data)
-      let playlists = this.state.playlists.filter( playlist => playlist._id !== res.data.data._id)
-      console.log("deleted a playlist");
+      let playlists = this.state.playlists.filter( playlist => playlist._id !== res.data.data._id);
       this.setState({playlists});
     }).catch(err => console.log(err));
   }
@@ -45,10 +44,10 @@ class PlaylistContainer extends Component {
     return(
       <div className="playlistContainer">
         <h1>Playlist</h1>
-        <button type="button" onClick={()=> this.setState({isModalOpen:true})}> <i class="fa fa-plus-square-o" aria-hidden="true"></i> Add playlist</button>
+        <button type="button" onClick={()=> this.setState({isModalOpen:true})}> <i className="fa fa-plus-square-o" aria-hidden="true"></i> Add playlist</button>
         <PlaylistModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} createPlaylist={this.createPlaylist}/>
         <div className="playlists">
-          <Playlists playlists={this.state.playlists} removePlaylist={this.removePlaylist}/>
+          <Playlists playlists={this.state.playlists} removePlaylist={this.removePlaylist} playPlaylist={this.props.playPlaylist}/>
         </div>
       </div>
     )

@@ -1,13 +1,21 @@
 import React from 'react';
 
+let lengthHandler = name => {
+  if(name.length > 14) {
+    return name.substring(0,13) + "..."
+  } else {
+    return name;
+  }
+}
+
 let renderDetail = props => {
-  if(props.currentSongImg.length > 1) {
+  if(props.song) {
     return (
       <>
-      <img src={props.currentSongImg} alt='current-song-image'/>
+      {props.song.picture && <img src={props.song.picture} alt='current-song-image'/>}
       <div className="details">
-        <h3>{props.currentSongName}</h3>
-        <h5>Artist name</h5>
+        {props.song.name && <h3>{lengthHandler(props.song.name)}</h3>}
+        {props.song.artist && <h5>{props.song.artist}</h5>}
       </div>
       </>
     )
@@ -22,7 +30,7 @@ let renderDetail = props => {
 const MusicDetail = props => {
   return (
     <>
-      {renderDetail(props)}
+    {renderDetail(props)}
     </>
   )
 }

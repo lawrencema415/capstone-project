@@ -9,7 +9,6 @@ class Search extends Component {
   }
 
   handleChange = (event) => {
-    if(event.target.value.length >= 2) {
       let filtered = this.props.songs.filter(song => song.name.toLowerCase().includes(event.target.value.toLowerCase()) || song.artist.toLowerCase().includes(event.target.value.toLowerCase()))
       this.setState({filter:filtered,value:event.target.value})
       if(filtered.length > 0) {
@@ -17,8 +16,17 @@ class Search extends Component {
       } else {
         this.setState({found:false})
       }
-    }
   };
+
+  // handleChange = debounce((e) => {
+  //   let filtered = this.props.songs.filter(song => song.name.toLowerCase().includes(event.target.value.toLowerCase()) || song.artist.toLowerCase().includes(event.target.value.toLowerCase()))
+  //   this.setState({filter:filtered,value:event.target.value})
+  //   if(filtered.length > 0) {
+  //     this.setState({found:true})
+  //   } else {
+  //     this.setState({found:false})
+  //   }
+  // }, 500)
 
   render() {
     return(
@@ -28,8 +36,8 @@ class Search extends Component {
         </div>
         <section type="results">
         <Result results={this.state.filter} value={this.state.value} found={this.state.found} setCurrentSong={this.props.setCurrentSong}
-          setCurrentSongImg={this.props.setCurrentSongImg} setPlayNext={this.props.setPlayNext}
-          setCurrentSongName={this.props.setCurrentSongName}/>
+         setPlayNext={this.props.setPlayNext} togglePlay={this.props.togglePlay} isPlaying={this.props.isPlaying}
+          />
         </section>
       </div>
     )

@@ -20,7 +20,6 @@ let modalCloseButtonStyles = {
   borderRadius: '50%',
   border: 'none',
   width: '30px',
-  fontWeight: 'bold',
   alignSelf: 'flex-end',
   display:'inline-block',
   fontSize:'11px',
@@ -53,7 +52,7 @@ class PlaylistModal extends Component {
     user: ''
   }
 
-  componentWillMount() {
+  componentDidMount() {
     document.addEventListener('mousedown', this.handleClick, false);
     this.setState({user:localStorage.getItem('uid')});
   }

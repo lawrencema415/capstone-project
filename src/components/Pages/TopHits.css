@@ -1,0 +1,26 @@
+.homeContainer {
+  color: white;
+  height: 907px;
+  padding-bottom: 90px;
+  padding-left: 230px;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(120deg, #184c80, #191414);
+  overflow: auto;
+}
+
+.selections {
+  text-decoration: none;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.selections a {
+  padding: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.selections a:hover {
+  opacity: 1;
+}

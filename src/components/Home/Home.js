@@ -5,19 +5,37 @@ import NavBar from '../NavBar/NavBar';
 import PlaylistContainer from '../Playlist/PlaylistContainer';
 import Search from '../Search/Search';
 import MusicPlayerContainer from '../MusicContainer/MusicPlayerContainer';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import './Home.css';
-
+import Routes from '../../config/routes';
+import Featured from '../Pages/Featured';
 class Home extends Component {
   state = {
-    play: false,
+    isPlaying: false,
     songs: [],
     currentUser: null,
-    currentTab: "Home",
     albums: [],
-    currentSong:"",
-    currentSongImg:"",
-    currentSongName:""
+    song: null,
+    currentPlaylist: {Songs:[]},
+    loop: false
   };
+
+  togglePlay = (select) => {
+    if(select === true) {
+      if(this.state.isPlaying === true) {
+        return;
+      } else {
+        this.setState({isPlaying:true});
+      }
+    }
+    if(this.state.song !== null) {
+      this.state.isPlaying ? this.setState({isPlaying:false}) : this.setState({isPlaying:true});
+    }
+  }
+
+  toggleLoop = () => {
+    this.state.loop ? this.setState({loop:false}) : this.setState({loop:true});
+  }
 
   logout = () => {
     axios.post(`${API_URL}/auth/logout`, {withCredentials: true})
@@ -29,81 +47,105 @@ class Home extends Component {
     .catch(err => console.log(err));
   };
 
-  getData = () => {
-    axios.get(`${API_URL}/song/index`)
-    .then(res => {
-      this.setState({songs:res.data.data})
-    }).catch(err => console.log(err));
-
-    axios.get(`${API_URL}/album/index`)
-    .then(res => {
-      this.setState({albums:res.data.data})
-    }).catch(err => console.log(err));
-  }
-  getUserInfo = id => {
-    axios.get(`${API_URL}/auth/show/${id}`)
-    .then(res => {
-      this.setState({currentUser:res.data.data})
-    }).catch(err => console.log(err));
+  getData = async(id) => {
+    const songs = await axios.get(`${API_URL}/song/index`)
+    const albums = await axios.get(`${API_URL}/album/index`)
+    const user = await axios.get(`${API_URL}/auth/show/${id}`)
+    this.setState({songs: songs.data.data, albums: albums.data.data, currentUser:user.data.data})
   }
 
 // Temp set song descriptions, need to change later
-  setCurrentSong = song => {
-    this.setState({currentSong:song});
-  }
-  setCurrentSongImg = img => {
-    this.setState({currentSongImg:img});
-  }
-  setCurrentSongName = name => {
-    this.setState({currentSongName:name});
+  setCurrentSong = (song) => {
+    this.setState({song});
   }
 
   componentDidMount() {
     const currentUser = localStorage.getItem('uid');
-    this.getUserInfo(currentUser);
-    this.getData();
+    this.getData(currentUser);
   };
 
-  renderItem() {
-    if(this.state.currentTab === "Home") {
-      return (
-        <>
-        <h1>Top hits</h1>
-        </>
-      )
+  playNext = () => {
+    let playlist = this.state.currentPlaylist;
+    for(let i = 0;i < playlist.Songs.length;i++) {
+      if(playlist.Songs[i].name === this.state.song.name) {
+        if(!this.state.loop && i === playlist.Songs.length - 1) {
+          this.setCurrentSong(null);
+          this.togglePlay();
+          return;
+        }
+        if(i === playlist.Songs.length - 1) {
+          this.setCurrentSong(playlist.Songs[0]);
+          this.togglePlay();
+          return;
+        } else {
+          this.setCurrentSong(playlist.Songs[i+1]);
+          this.togglePlay(true);
+          return;
+        }
+      }
     }
-    if(this.state.currentTab === "Search") {
-      return (
-        <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong} setCurrentSongImg={this.setCurrentSongImg} setCurrentSongName={this.setCurrentSongName} />
-      )
-    }
-    if(this.state.currentTab === "Playlist") {
-      return (
-        <PlaylistContainer setCurrentSong={this.setCurrentSong}/>
-      )
-    }
+
   }
 
-  changeTab = (name) => {
-    this.setState({currentTab:name});
-  };
+  addToQueue = song => {
+    let playlist = this.state.currentPlaylist;
+    if(this.state.song === null) {
+      this.setCurrentSong(song);
+      this.togglePlay()
+      return ;
+    }
+    playlist.Songs.push(song)
+    this.setState({currentPlaylist:playlist});
+  }
+
+  playPrev = () => {
+    let playlist = this.state.currentPlaylist;
+    for(let i = playlist.Songs.length - 1;i > 0;i--) {
+      if(playlist.Songs[i].name === this.state.song.name) {
+        if(!this.state.loop && i === 0) {
+          this.setCurrentSong(null);
+          this.togglePlay();
+          return;
+        }
+        if(i === 0) {
+          this.setCurrentSong(playlist.Songs[playlist.Songs.length - 1]);
+          this.togglePlay();
+          return;
+        } else {
+          this.setCurrentSong(playlist.Songs[i-1]);
+          this.togglePlay(true);
+          return;
+        }
+      }
+    }
+
+  }
+
+  playPlaylist = playlist => {
+    this.setState({currentPlaylist:playlist});
+    this.setState({song:playlist.Songs[0]});
+    this.togglePlay(true);
+  }
 
   render() {
-    console.log("render");
     return (
       <div className="container">
-        <div className="navbar"> <NavBar changeTab={this.changeTab} logout={this.logout} currentUser={this.state.currentUser}/> </div>
-        <div className="content"> {this.renderItem()} </div>
+        <div className="navbar"> <NavBar  isPlaying={this.state.isPlaying} logout={this.logout} currentUser={this.state.currentUser}/> </div>
+        <Switch>
+          <Route exact path='/browse/search' render={() => <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong} togglePlay={this.togglePlay}
+          />} />
+          <Route exact path='/browse/playlist' render={() => <PlaylistContainer playPlaylist={this.playPlaylist}/>} />
+          <Route exact path='/browse' render={() => <Featured />} />
+        </Switch>
         <div className="music-control-container">
           <MusicPlayerContainer
-            currentSong={this.state.currentSong} currentSongImg={this.state.currentSongImg}
-            currentSongName={this.state.currentSongName}
+            isPlaying={this.state.isPlaying} togglePlay={this.togglePlay} song={this.state.song} playNext={this.playNext} playPrev={this.playPrev}
+            toggleLoop={this.toggleLoop}
           />
         </div>
       </div>
     );
   };
-
 };
 
 export default Home;

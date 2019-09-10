@@ -14,7 +14,6 @@ class Result extends Component {
     let uid = localStorage.getItem('uid')
     axios.get(`${API_URL}/playlist/userPlaylist/${uid}`)
     .then(res => {
-      console.log(res.data.data);
       this.setState({playlists:res.data.data});
     }).catch(err => console.log(err));
   };
@@ -28,9 +27,8 @@ class Result extends Component {
           <button type="button" onClick={() => {this.setState({isModalOpen:true,selectedSong:song})}}>...</button>
           <button type="button" onClick={() => {
               this.setState({selectedSong:song});
-              this.props.setCurrentSong(song.url);
-              this.props.setCurrentSongImg(song.picture);
-              this.props.setCurrentSongName(song.name);
+              this.props.setCurrentSong(song);
+              this.props.togglePlay(true);
             }}>
             Play
           </button>
@@ -48,12 +46,11 @@ class Result extends Component {
     if (this.props.results.length <= 0) {
       return (
         <div className="description">
-        <h2>Search Musiq</h2>
+        <h2>Search Spotafly</h2>
         <h3>Find your favorite songs, artists, albums and playlists.</h3>
         </div>
       )
     }
-
     return songs;
   }
 

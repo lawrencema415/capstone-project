@@ -20,14 +20,12 @@ let modalCloseButtonStyles = {
   borderRadius: '50%',
   border: 'none',
   width: '30px',
-  fontWeight: 'bold',
   alignSelf: 'flex-end',
   display:'inline-block',
   fontSize:'11px',
   lineHeight:'18px',
   color:'white',
-  fontWeight:'400px',
-  borderRadius:'0.3em',
+  fontWeight:'400px'
 }
 
 let label1Styles = {
@@ -37,15 +35,6 @@ let label1Styles = {
   color:'white'
 }
 
-let placeholderStyles = {
-  color:'#535353',
-  fontSize:'48px',
-  lineHeight:'56px',
-  fontWeight:'900px',
-  backgroundColor:'#282828',
-  border: '0',
-  caretColor:'green'
-}
 
 class AddSongModal extends Component {
 
@@ -77,9 +66,9 @@ class AddSongModal extends Component {
   }
 
   renderPlaylists = playlists => {
-    let options = playlists.map( playlist => {
+    let options = playlists.map( (playlist,idx) => {
       return (
-        <button type="button" onClick={() => {
+        <button type="button" key={idx} onClick={() => {
             this.props.addSong(playlist._id,this.props.selectedSong);
             this.props.closeModal();
           }

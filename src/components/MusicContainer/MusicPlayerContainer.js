@@ -5,11 +5,12 @@ import VolumeControl from './VolumeControl';
 class MusicPlayerContainer extends Component {
 
   render() {
-
     return(
       <>
-        <div className="pic"> <MusicDetail currentSongImg={this.props.currentSongImg} currentSongName={this.props.currentSongName}/> </div>
-        <MusicControl currentSong={this.props.currentSong} />
+        <div className="pic"> <MusicDetail song={this.props.song} /> </div>
+        <MusicControl togglePlay={this.props.togglePlay} isPlaying={this.props.isPlaying} song={this.props.song} playNext={this.props.playNext}
+        playPrev={this.props.playPrev} toggleLoop={this.props.toggleLoop}
+        />
         <div className="controllers"> <VolumeControl /> </div>
       </>
     )

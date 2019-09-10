@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import './MusicControl.css';
 
-
 class MusicControl extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPlaying:false,
       progress:0,
       dragProgressBar:false,
       loop:false,
@@ -31,10 +29,6 @@ class MusicControl extends Component {
     }
   }
 
-  togglePlay = () => {
-    this.state.isPlaying ? this.setState({isPlaying:false}) : this.setState({isPlaying:true});
-  }
-
   toggleMute = () => {
     this.state.isMuted ? this.setState({isMuted:false}) : this.setState({isMuted:true});
   }
@@ -49,11 +43,14 @@ class MusicControl extends Component {
   }
 
   setTime = (e) => {
-    if(this.state.dragProgressBar) {
-      let progress = ((e.clientX - offsetLeftConvert(this.refs.progress_bar)) / this.refs.progress_bar.clientWidth);
-      this.setState({progress});
-      this.progressInChange = true
+    if(this.props.song !== null) {
+      if(this.state.dragProgressBar) {
+        let progress = ((e.clientX - offsetLeftConvert(this.refs.progress_bar)) / this.refs.progress_bar.clientWidth);
+        this.setState({progress});
+        this.progressInChange = true
+      }
     }
+
   }
 
   render() {
@@ -62,16 +59,17 @@ class MusicControl extends Component {
     if(this.refs.player) {
       let player = this.refs.player;
       player.loop = this.state.loop;
-
-      if(player.currentSrc !== this.props.currentSong) {
-        player.src = this.props.currentSong;
+      if(this.props.song) {
+        if(player.currentSrc !== this.props.song.url) {
+          player.src = this.props.song.url;
+        }
       }
 
       if(player.paused && !player.ended) {
-        if(this.state.isPlaying) {
+        if(this.props.isPlaying) {
           player.play();
         }
-      } else if (!this.state.isPlaying) {
+      } else if (!this.props.isPlaying) {
         player.pause();
       }
 
@@ -92,8 +90,8 @@ class MusicControl extends Component {
     }
 
     let playerClassName = {
-      "fa fa-play": !this.state.isPlaying,
-      "fa fa-pause": this.state.isPlaying
+      "fa fa-play": !this.props.isPlaying,
+      "fa fa-pause": this.props.isPlaying
     };
 
     let muteClassName = {
@@ -103,22 +101,26 @@ class MusicControl extends Component {
 
     return (
       <div className="player">
-
         <div className="audio-controls">
-          <a onClick={() => {}}><i className="fa fa-step-backward" aria-hidden="true"></i></a>
-          <a id="playButton" onClick={this.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
-          <a onClick={() => {}}><i className="fa fa-step-forward" aria-hidden="true"></i></a>
-          <div className="timeStamp" > {timeString(currentTime,totalTime)}</div>
-        </div>
-        <div className="progress" onMouseDown={this.progressBarActivate} onMouseMove={this.setTime} onMouseLeave={() => this.setState({dragProgressBar:false})} onMouseUp={this.stopDrag}>
-          <div ref="progress_bar" className="bar">
+          <div className="buttons">
+            <a alt="backward-button" onClick={this.props.playPrev}><i className="fa fa-step-backward" alt="forward-button" aria-hidden="true" ></i></a>
+            <a alt="play-button" id="playButton" onClick={this.props.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
+            <a alt="forward-button" onClick={this.props.playNext}><i className="fa fa-step-forward" aria-hidden="true"></i></a>
+          </div>
+        <div>
+      </div>
+      <div className="timeStamp" > {timeString(currentTime,totalTime)}</div>
+      <div className="progress" onMouseDown={this.progressBarActivate} onMouseMove={this.setTime} onMouseLeave={() => this.setState({dragProgressBar:false})} onMouseUp={this.stopDrag}>
+        <div ref="progress_bar" className="bar">
           <div style={{width: (this.state.progress * 100) + "%" }}></div>
           </div>
         </div>
-        <audio ref="player" autoPlay={this.state.isPlaying}>
-          <source src={this.props.currentSong}/>
-        </audio>
-        <a onClick={this.toggleMute}><i className={toggleClassName(muteClassName)} aria-hidden="true"></i></a>
+      </div>
+      <audio ref="player">
+        {this.props.song && <source src={this.props.song.url}/>}
+      </audio>
+      <a alt="repeat-button" onClick={this.props.toggleLoop}><i class="fa fa-repeat" aria-hidden="true"></i></a>
+      <a alt="mute-button" onClick={this.toggleMute}><i className={toggleClassName(muteClassName)} aria-hidden="true"></i></a>
       </div>
     );
   }
@@ -126,7 +128,9 @@ class MusicControl extends Component {
 
 function toggleClassName(obj) {
   let css = [];
-  Object.keys(obj).forEach(key => obj[key] && css.push(key));
+  for( let i in obj ) {
+    obj[i] && css.push(i);
+  };
   return css.join('');
 }
 
@@ -149,8 +153,6 @@ function timeString(currentTime,totalTime) {
   }
   return convertTime(currentTime) + " : " + convertTime(totalTime);
 }
-
-
 
 // Patrick Lorio youtube tutorial
 function offsetLeftConvert(ele) {
