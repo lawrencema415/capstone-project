@@ -38,7 +38,7 @@ let label1Styles = {
 
 class AddSongModal extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     document.addEventListener('mousedown', this.handleClick, false);
     this.setState({user:localStorage.getItem('uid')});
   }

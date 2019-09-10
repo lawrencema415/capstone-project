@@ -5,6 +5,7 @@ import NavBar from '../NavBar/NavBar';
 import PlaylistContainer from '../Playlist/PlaylistContainer';
 import Search from '../Search/Search';
 import MusicPlayerContainer from '../MusicContainer/MusicPlayerContainer';
+import PlaylistView from '../Pages/PlaylistView';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import './Home.css';
 import Routes from '../../config/routes';
@@ -133,12 +134,13 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
-        <div className="navbar"> <NavBar  isPlaying={this.state.isPlaying} logout={this.logout} currentUser={this.state.currentUser}/> </div>
+        <NavBar  isPlaying={this.state.isPlaying} logout={this.logout} currentUser={this.state.currentUser}/>
         <Switch>
-          <Route exact path='/browse/search' render={() => <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong} togglePlay={this.togglePlay}
+          <Route exact path='/search' render={() => <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong} togglePlay={this.togglePlay}
           />} />
-          <Route exact path='/browse/playlist' render={() => <PlaylistContainer playPlaylist={this.playPlaylist}/>} />
-          <Route exact path='/browse' render={() => <Featured />} />
+          <Route exact path='/playlists' render={() => <PlaylistContainer playPlaylist={this.playPlaylist}/>} />
+          <Route exact path='/' render={() => <Featured />} />
+          <Route path='/playlist/:id' render={(props)=> <PlaylistView id={props.match.params.id} />} />
         </Switch>
         <div className="music-control-container">
           <MusicPlayerContainer

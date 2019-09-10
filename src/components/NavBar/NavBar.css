@@ -4,6 +4,7 @@
   font-weight: 700;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 #logo {
@@ -62,4 +63,8 @@ li:active {
 .bot-nav {
   text-align: center;
   align-items: flex-end;
+}
+
+.bottom {
+  padding-bottom: 85px;
 }
