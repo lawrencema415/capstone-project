@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios';
 import { API_URL } from '../../constant';
 import PlaylistModal from '../Modal/PlaylistModal';
-import Playlists from './Playlists';
+import Playlist from './Playlist';
 import './PlaylistContainer.css'
 
 class PlaylistContainer extends Component {
@@ -40,6 +40,13 @@ class PlaylistContainer extends Component {
     }).catch(err => console.log(err));
   }
 
+  renderPlaylists = () => {
+    let playlist = this.state.playlists.map( playlist =>
+        <Playlist playlist={playlist} playPlaylist={this.props.playPlaylist} removePlaylist={this.removePlaylist}/>
+    )
+    return playlist
+  }
+
   render() {
     return(
       <div className="playlistContainer">
@@ -47,7 +54,7 @@ class PlaylistContainer extends Component {
         <button type="button" onClick={()=> this.setState({isModalOpen:true})}> <i className="fa fa-plus-square-o" aria-hidden="true"></i> Add playlist</button>
         <PlaylistModal closeModal={this.closeModal} isModalOpen={this.state.isModalOpen} createPlaylist={this.createPlaylist}/>
         <div className="playlists">
-          <Playlists playlists={this.state.playlists} removePlaylist={this.removePlaylist} playPlaylist={this.props.playPlaylist}/>
+        {this.renderPlaylists()}
         </div>
       </div>
     )

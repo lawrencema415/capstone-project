@@ -25,7 +25,7 @@ class MusicControl extends Component {
       }
     }
     if( player && player.ended) {
-
+      this.props.playNext();
     }
   }
 
@@ -98,6 +98,8 @@ class MusicControl extends Component {
       "fa fa-volume-up": !this.state.isMuted,
       "fa fa-volume-off": this.state.isMuted
     }
+    // <a alt="repeat-button" onClick={this.props.toggleLoop}><i class="fa fa-repeat" aria-hidden="true"></i></a>
+    // <a alt="mute-button" onClick={this.toggleMute}><i className={toggleClassName(muteClassName)} aria-hidden="true"></i></a>
 
     return (
       <div className="player">
@@ -109,18 +111,19 @@ class MusicControl extends Component {
           </div>
         <div>
       </div>
+      <div className="bottom">
       <div className="timeStamp" > {timeString(currentTime,totalTime)}</div>
-      <div className="progress" onMouseDown={this.progressBarActivate} onMouseMove={this.setTime} onMouseLeave={() => this.setState({dragProgressBar:false})} onMouseUp={this.stopDrag}>
-        <div ref="progress_bar" className="bar">
-          <div style={{width: (this.state.progress * 100) + "%" }}></div>
+        <div className="progress" onMouseDown={this.progressBarActivate} onMouseMove={this.setTime} onMouseLeave={() => this.setState({dragProgressBar:false})} onMouseUp={this.stopDrag}>
+          <div ref="progress_bar" className="bar">
+            <div style={{width: (this.state.progress * 100) + "%" }}></div>
+            </div>
           </div>
         </div>
+        <div className="timeStamp" > {timeString(totalTime)}</div>
       </div>
       <audio ref="player">
         {this.props.song && <source src={this.props.song.url}/>}
-      </audio>
-      <a alt="repeat-button" onClick={this.props.toggleLoop}><i class="fa fa-repeat" aria-hidden="true"></i></a>
-      <a alt="mute-button" onClick={this.toggleMute}><i className={toggleClassName(muteClassName)} aria-hidden="true"></i></a>
+        </audio>
       </div>
     );
   }
@@ -147,11 +150,11 @@ function convertTime(time) {
   return minutes + ":" + seconds;
 }
 
-function timeString(currentTime,totalTime) {
-  if(convertTime(currentTime) == "") {
+function timeString(time) {
+  if(convertTime(time) == "") {
     return ""
   }
-  return convertTime(currentTime) + " : " + convertTime(totalTime);
+  return convertTime(time) ;
 }
 
 // Patrick Lorio youtube tutorial

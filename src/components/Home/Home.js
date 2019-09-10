@@ -66,7 +66,7 @@ class Home extends Component {
 
   playNext = () => {
     let playlist = this.state.currentPlaylist;
-    for(let i = 0;i < playlist.Songs.length;i++) {
+    for(let i = 0;i < playlist.Songs.length - 1;i++) {
       if(playlist.Songs[i].name === this.state.song.name) {
         if(!this.state.loop && i === playlist.Songs.length - 1) {
           this.setCurrentSong(null);
@@ -122,6 +122,9 @@ class Home extends Component {
   }
 
   playPlaylist = playlist => {
+    if(playlist.Songs.length <= 0 ) {
+      return ;
+    }
     this.setState({currentPlaylist:playlist});
     this.setState({song:playlist.Songs[0]});
     this.togglePlay(true);
