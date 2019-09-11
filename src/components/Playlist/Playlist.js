@@ -15,6 +15,13 @@ class Playlist extends Component {
     }
   }
 
+  handleLength = (name) => {
+    if(name.length >= 13) {
+      return name.substring(0,12) + "...";
+    }
+    return name;
+  }
+
   render() {
     return (
       <div className="playlist-card" key={this.props.playlist._id}>
@@ -23,8 +30,11 @@ class Playlist extends Component {
           <button type="button" onClick={()=>this.props.playPlaylist(this.props.playlist)}>
             <i className="fa fa-play-circle-o" aria-hidden="true" style={this.selectStyle()}></i>
           </button>
+          <div className="label">
+          {this.handleLength(this.props.playlist.name)} <button id="removeButton" type="button" onClick={()=>this.props.removePlaylist(this.props.playlist._id)}>&#10005;</button>
+          </div>
         </div>
-        {this.props.playlist.name} <button type="button" onClick={()=>this.props.removePlaylist(this.props.playlist._id)}>Delete</button>
+
 
       </div>
     )

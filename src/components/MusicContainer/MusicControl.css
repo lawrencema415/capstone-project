@@ -112,3 +112,7 @@
 .fa:hover {
   cursor: pointer;
 }
+
+.bottom > div {
+  display: inline-block;
+}

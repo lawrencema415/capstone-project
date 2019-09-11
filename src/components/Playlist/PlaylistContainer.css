@@ -32,10 +32,11 @@ button:hover {
 .playlists {
   text-align: left;
   padding-left: 8.125rem;
+  padding-top: 5rem;
 }
 
 .img-container i {
-  font-size: 80px;
+  font-size: 55px;
   color: white;
   position: absolute;
   top: 50%;
@@ -56,4 +57,15 @@ button:hover {
 /* hover not working  */
 .img-container img:hover i {
   opacity: 1;
+}
+
+.label {
+  display: flex;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  justify-content: space-between;
+}
+
+#removeButton {
+  right:0;
 }

@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   vertical-align: baseline;
-  font-family: 'Cabin', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
 
@@ -61,14 +61,28 @@
 /* playlist card styles */
 .playlist-card {
   display: inline-block;
-  height: 14.0625rem;
-  width: 14.0625rem;
-}
-
-.playlist-card img {
-
+  padding-bottom: 30px;
 }
 
 h4 {
   color: gray;
+}
+
+.select-button {
+  font-size: 14px;
+  line-height: 17px;
+  weight: 400;
+  background-color: #1DB954;
+  color: white;
+  opacity: 0.9;
+  margin-top: 10px;
+  padding: 10px 45px 10px 45px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+
+.select-button:hover {
+  transform: scale(1.05);
+  opacity: 1;
 }

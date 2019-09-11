@@ -6,8 +6,7 @@ import { API_URL } from '../../constant';
 class Result extends Component {
   state = {
     isModalOpen:false,
-    playlists:[],
-    selectedSong:null
+    playlists:[]
   }
 
   componentDidMount() {
@@ -24,13 +23,12 @@ class Result extends Component {
           <div key={song._id}>
           <h3>{song.name}</h3>
           <h4>{song.artist}</h4>
-          <button type="button" onClick={() => {this.setState({isModalOpen:true,selectedSong:song})}}>...</button>
+          <button type="button" onClick={() => {this.setState({isModalOpen:true,selectedSong:song})}}><i className="fa fa-plus" aria-hidden="true"></i></button>
           <button type="button" onClick={() => {
-              this.setState({selectedSong:song});
               this.props.setCurrentSong(song);
               this.props.togglePlay(true);
             }}>
-            Play
+            <i className="fa fa-music" aria-hidden="true"></i>
           </button>
           </div>
         )

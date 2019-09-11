@@ -52,10 +52,9 @@ let closeSpanStyles = {
   color:'black'
 }
 
-class PlaylistModal extends Component {
+class EditModal extends Component {
   state = {
-    name:'',
-    user: ''
+    name:''
   }
 
   componentDidMount() {
@@ -81,7 +80,8 @@ class PlaylistModal extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     let name = this.state;
-    this.props.createPlaylist(name);
+    this.props.editPlaylistName(name);
+    this.props.updateStatePlaylist(this.state.name);
     this.props.closeModal();
   }
 
@@ -89,11 +89,11 @@ class PlaylistModal extends Component {
       let modal = (
         <div style={modalStyles} ref={node => this.node = node}>
         <span style={closeSpanStyles} onClick={() => this.props.closeModal()}>&#10005;</span>
-        <label style={label1Styles}>Create a new playlist</label>
+        <label style={label1Styles}>Edit playlist name</label>
         <form>
-        <input autoFocus type="text" name="name" onChange={this.handleChange} style={placeholderStyles} placeholder="New playlist"/>
+        <input autoFocus type="text" name="name" onChange={this.handleChange} style={placeholderStyles} placeholder="New name"/>
         </form>
-          <button id="create-button" type="submit" onClick={this.handleSubmit} style={modalCloseButtonStyles}> Confirm </button>
+          <button id="create-button" type="submit" onClick={this.handleSubmit} style={modalCloseButtonStyles}> Create </button>
         </div>
       )
 
@@ -108,4 +108,4 @@ class PlaylistModal extends Component {
   }
 };
 
-export default PlaylistModal;
+export default EditModal;

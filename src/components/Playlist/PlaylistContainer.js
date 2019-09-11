@@ -7,13 +7,13 @@ import './PlaylistContainer.css'
 
 class PlaylistContainer extends Component {
   state = {
-    value: '',
     isModalOpen: false,
     playlists:[]
   }
 
   componentDidMount() {
-    axios.get(`${API_URL}/playlist/index`)
+    const currentUser = localStorage.getItem('uid');
+    axios.get(`${API_URL}/playlist/userPlaylist/${currentUser}`)
     .then(res => {
       this.setState({playlists:res.data.data})
     }).catch(err => console.log(err));

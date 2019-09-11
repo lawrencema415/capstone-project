@@ -102,29 +102,32 @@ class MusicControl extends Component {
     // <a alt="mute-button" onClick={this.toggleMute}><i className={toggleClassName(muteClassName)} aria-hidden="true"></i></a>
 
     return (
-      <div className="player">
-        <div className="audio-controls">
-          <div className="buttons">
-            <a alt="backward-button" onClick={this.props.playPrev}><i className="fa fa-step-backward" alt="forward-button" aria-hidden="true" ></i></a>
-            <a alt="play-button" id="playButton" onClick={this.props.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
-            <a alt="forward-button" onClick={this.props.playNext}><i className="fa fa-step-forward" aria-hidden="true"></i></a>
-          </div>
-        <div>
-      </div>
-      <div className="bottom">
-      <div className="timeStamp" > {timeString(currentTime,totalTime)}</div>
-        <div className="progress" onMouseDown={this.progressBarActivate} onMouseMove={this.setTime} onMouseLeave={() => this.setState({dragProgressBar:false})} onMouseUp={this.stopDrag}>
-          <div ref="progress_bar" className="bar">
-            <div style={{width: (this.state.progress * 100) + "%" }}></div>
+            <div className="player">
+              <div className="audio-controls">
+                <div className="buttons">
+                  <a alt="backward-button" onClick={this.props.playPrev}><i className="fa fa-step-backward" alt="forward-button" aria-hidden="true" ></i></a>
+                  <a alt="play-button" id="playButton" onClick={this.props.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
+                  <a alt="forward-button" onClick={this.props.playNext}><i className="fa fa-step-forward" aria-hidden="true"></i></a>
+                </div>
+              <div>
+            </div>
+
+            <div className="bottom">
+              <div className="timeStamp" > {timeString(currentTime)}</div>
+              <div>
+                <div className="progress" onMouseDown={this.progressBarActivate} onMouseMove={this.setTime} onMouseLeave={() => this.setState({dragProgressBar:false})} onMouseUp={this.stopDrag}>
+                  <div ref="progress_bar" className="bar">
+                    <div style={{width: (this.state.progress * 100) + "%" }}></div>
+                  </div>
+                </div>
+              </div>
+              <div className="timeStamp" > {timeString(totalTime)}</div>
             </div>
           </div>
-        </div>
-        <div className="timeStamp" > {timeString(totalTime)}</div>
-      </div>
-      <audio ref="player">
-        {this.props.song && <source src={this.props.song.url}/>}
-        </audio>
-      </div>
+            <audio ref="player">
+              {this.props.song && <source src={this.props.song.url}/>}
+            </audio>
+            </div>
     );
   }
 };
