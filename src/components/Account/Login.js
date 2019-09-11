@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { API_URL } from '../../constant';
-
+import './Form.css';
 class Login extends Component {
   state = {
     email: '',
@@ -29,16 +29,23 @@ class Login extends Component {
     });
   };
 
+  redirect = () => {
+    this.props.history.push('/signup');
+  }
 
   render() {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
+          <div className="logo">
+            <img src="https://spotify-clone.s3-us-west-1.amazonaws.com/favicon-32x32.png" alt="logo"/>
+            Spotafly
+          </div>
           <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} placeholder="email" />
           <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="password" />
-          <button type="submit">Log In</button>
+          <button class="select-button" type="submit">Log In</button>
         </form>
-        <h3>Don't have an account? <a href="#">Sign Up</a></h3>
+        <h3 className="redirect">Don't have an account? <a onClick={this.redirect}>Sign Up</a></h3>
       </div>
     )
   }

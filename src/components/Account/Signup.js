@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { API_URL } from '../../constant';
-
+import './Form.css';
 class Signup extends Component {
   state = {
     email: '',
@@ -37,19 +37,27 @@ class Signup extends Component {
 
   };
 
+  redirect = () => {
+    this.props.history.push('/login');
+  }
+
 
   render() {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
+          <div className="logo">
+            <img src="https://spotify-clone.s3-us-west-1.amazonaws.com/favicon-32x32.png" alt="logo"/>
+            Spotafly
+          </div>
           <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} placeholder="Email" />
           <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" />
           <input type="password" id="password2" name="password2" value={this.state.password2} onChange={this.handleChange} placeholder="Confirm password" />
           <input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange} placeholder="What should we call you?" />
           <input type="date" id="birthday" name="birthday" value={this.state.birthday} onChange={this.handleChange} placeholder="birthday" />
-          <button type="submit">Sign up</button>
+          <button class="select-button" type="submit">Sign up</button>
         </form>
-        <h3>Already have an account? <a href="#">Log In</a></h3>
+        <h3 className="redirect">Already have an account? <a onClick={this.redirect}>Log In</a></h3>
       </div>
     )
   }

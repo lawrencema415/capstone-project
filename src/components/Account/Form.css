@@ -1,0 +1,28 @@
+form input{
+  display: block;
+  padding: 5px;
+  margin: 15px;
+  text-align: center;
+}
+
+form {
+  position: absolute;
+  left: 45%;
+  top: 30%;
+}
+
+.logo {
+  text-align: center;
+}
+
+a {
+  color: blue;
+  font-style: oblique;
+  cursor: pointer;
+}
+
+.redirect {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+}
