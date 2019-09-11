@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
-import './TopHits.css';
+import './Featured.css';
 import PlaylistModal from "../Modal/PlaylistModal"
-import Playlists from '../Playlist/Playlists.js'
 
 class Featured extends Component{
   state = {

@@ -15,7 +15,7 @@ export default withRouter( ({setCurrentUser, currentUser, history} ) => {
     <Switch>
       <Route exact path = '/us' component = { Landing } />
       <Route path='/auth' render={() => <Auth history={history} setCurrentUser={setCurrentUser} currentUser={currentUser}/>} />
-    {currentUser ?  <Route path = '/' component = { Home }/> : <Redirect to='/us'/>}
+    {currentUser ?  <Route path = '/' render={() => <Home history={history} />} /> : <Redirect to='/us'/>}
     </Switch>
   )
 })

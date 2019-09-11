@@ -1,0 +1,43 @@
+.view-container {
+  color: white;
+  height: 907px;
+  padding-bottom: 90px;
+  padding-left: 230px;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(120deg, #791125, #0F0205);
+  overflow: auto;
+}
+
+.right-container {
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  right:0;
+  padding-top: 3.5rem;
+  padding-left: 7rem;
+  text-align: left;
+}
+
+.left-container img {
+  height: 20rem;
+  width: 20rem;
+}
+
+.left-container {
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  left: 11%;
+  padding-top: 5.5rem;
+}
+
+.song {
+  padding: 5px;
+  width: 56.25rem;
+  margin: 2rem;
+}
+
+.description {
+  color: gray;
+}

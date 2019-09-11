@@ -44,6 +44,11 @@
   color: white;
 }
 
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
 
 .progress {
   left: 95.45px;

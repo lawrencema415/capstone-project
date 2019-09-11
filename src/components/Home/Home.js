@@ -131,6 +131,10 @@ class Home extends Component {
     this.togglePlay(true);
   }
 
+  redirect = page => {
+    this.props.history.push(page);
+  }
+
   render() {
     return (
       <div className="container">
@@ -138,9 +142,9 @@ class Home extends Component {
         <Switch>
           <Route exact path='/search' render={() => <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong} togglePlay={this.togglePlay}
           />} />
-          <Route exact path='/playlists' render={() => <PlaylistContainer playPlaylist={this.playPlaylist}/>} />
+          <Route exact path='/playlists' render={() => <PlaylistContainer playPlaylist={this.playPlaylist} redirect={this.redirect}/>} />
           <Route exact path='/' render={() => <Featured />} />
-          <Route path='/playlist/:id' render={(props)=> <PlaylistView id={props.match.params.id} />} />
+          <Route path='/playlist/:id' render={(props)=> <PlaylistView id={props.match.params.id} playPlaylist={this.playPlaylist} redirect={this.redirect}/>} />
         </Switch>
         <div className="music-control-container">
           <MusicPlayerContainer

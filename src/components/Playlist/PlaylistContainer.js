@@ -42,7 +42,7 @@ class PlaylistContainer extends Component {
 
   renderPlaylists = () => {
     let playlist = this.state.playlists.map( playlist =>
-        <Playlist playlist={playlist} playPlaylist={this.props.playPlaylist} removePlaylist={this.removePlaylist}/>
+        <Playlist playlist={playlist} playPlaylist={this.props.playPlaylist} removePlaylist={this.removePlaylist} redirect={this.props.redirect}/>
     )
     return playlist
   }
