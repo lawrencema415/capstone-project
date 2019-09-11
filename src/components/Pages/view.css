@@ -37,3 +37,7 @@
   width: 56.25rem;
   margin: 2rem;
 }
+
+button {
+  padding: 5px;
+}

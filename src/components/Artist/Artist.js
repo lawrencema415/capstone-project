@@ -27,8 +27,6 @@ class Artist extends Component {
           {this.props.artist.name}
           </div>
         </div>
-
-
       </div>
     )
   }

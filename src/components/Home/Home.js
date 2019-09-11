@@ -126,12 +126,12 @@ class Home extends Component {
 
   }
 
-  playPlaylist = playlist => {
-    if(playlist.Songs.length <= 0 ) {
+  playPlaylist = songs => {
+    if(songs.length <= 0 ) {
       return ;
     }
-    this.setState({currentPlaylist:playlist});
-    this.setState({song:playlist.Songs[0]});
+    this.setState({currentPlaylist:songs});
+    this.setState({song:songs[0]});
     this.togglePlay(true);
   }
 

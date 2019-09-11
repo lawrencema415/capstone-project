@@ -10,7 +10,6 @@ export default withRouter( ({setCurrentUser, currentUser, history} ) => {
     )} />
   );
 
-  // <Route path='/artist/:name' name={props.match.params.name} /> }/>
   return (
     <Switch>
       <Route exact path = '/us' component = { Landing } />

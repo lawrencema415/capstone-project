@@ -12,12 +12,14 @@ class PlaylistView extends Component {
     userName:null
   }
 
+  getData = async(id) => {
+    const playlist = await axios.get(`${API_URL}/playlist/view/${this.props.id}`)
+    const user = await axios.get(`${API_URL}/auth/show/${playlist.data.data.user}`)
+    this.setState({playlist:playlist.data.data,userName:user.data.data.name})
+  }
+
   componentDidMount() {
-    axios.get(`${API_URL}/playlist/view/${this.props.id}`)
-    .then(res => {
-      this.setState({ playlist: res.data.data});
-    })
-    .catch(err => console.log(err));
+    this.getData();
   }
 
   renderSongs() {
@@ -31,11 +33,18 @@ class PlaylistView extends Component {
                   this.props.setCurrentSong(song);
                   this.props.togglePlay(true);
                 }}><i className="fa fa-music" aria-hidden="true"></i></button>
+                {this.checkUser() &&
+                  <button type="button" ><i className="fa fa-trash" aria-hidden="true"></i></button>
+                }
             </div>
           )
       })
       return songs;
     }
+  }
+
+  removeSong = song => {
+    axios.put()
   }
 
   updateStatePlaylist = name => {
@@ -80,8 +89,8 @@ class PlaylistView extends Component {
         <div className="left-container">
           {this.state.playlist.Songs && <img src={this.playlistPicture()}/>}
           <h1>{this.state.playlist.name}</h1>
-          <h5>{this.state.playlist.user}</h5>
-          <button className="select-button" onClick={() => this.props.playPlaylist(this.state.playlist)}>PLAY</button>
+          <h5>Made by: {this.state.userName}</h5>
+          <button className="select-button" onClick={() => this.props.playPlaylist(this.state.playlist.Songs)}>PLAY</button>
           {this.checkUser() && <button className="select-button" onClick={()=> this.setState({isModalOpen:true})}>Edit</button>}
         </div>
         <div className="right-container">
