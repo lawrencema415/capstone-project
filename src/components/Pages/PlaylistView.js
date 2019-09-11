@@ -8,7 +8,8 @@ class PlaylistView extends Component {
   state = {
     playlist:{},
     isHovered:false,
-    isModalOpen: false
+    isModalOpen: false,
+    userName:null
   }
 
   componentDidMount() {
@@ -26,11 +27,13 @@ class PlaylistView extends Component {
             <div key={song._id} className="song">
                 <h3>{song.name}</h3>
                 <h4>{song.artist}</h4>
-                <button type="button"><i className="fa fa-music" aria-hidden="true"></i></button>
+                <button type="button" onClick={() => {
+                  this.props.setCurrentSong(song);
+                  this.props.togglePlay(true);
+                }}><i className="fa fa-music" aria-hidden="true"></i></button>
             </div>
           )
       })
-
       return songs;
     }
   }

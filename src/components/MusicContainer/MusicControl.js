@@ -7,9 +7,9 @@ class MusicControl extends Component {
     this.state = {
       progress:0,
       dragProgressBar:false,
-      loop:false,
       volume: 1,
-      isMuted: false
+      isMuted: false,
+      isOnRepeat: false
     }
     this.progressInChange =  false;
     this.interval = setInterval(this.update,500);
@@ -53,12 +53,17 @@ class MusicControl extends Component {
 
   }
 
+  toggleRepeatState = () => {
+    this.state.isOnRepeat ? this.setState({isOnRepeat:false}) : this.setState({isOnRepeat:true});
+  }
+  // this.props.toggleLoop
+
   render() {
     let currentTime = 0;
     let totalTime = 0;
     if(this.refs.player) {
       let player = this.refs.player;
-      player.loop = this.state.loop;
+      player.loop = this.props.loop;
       if(this.props.song) {
         if(player.currentSrc !== this.props.song.url) {
           player.src = this.props.song.url;
@@ -98,8 +103,11 @@ class MusicControl extends Component {
       "fa fa-volume-up": !this.state.isMuted,
       "fa fa-volume-off": this.state.isMuted
     }
-    // <a alt="repeat-button" onClick={this.props.toggleLoop}><i class="fa fa-repeat" aria-hidden="true"></i></a>
-    // <a alt="mute-button" onClick={this.toggleMute}><i className={toggleClassName(muteClassName)} aria-hidden="true"></i></a>
+
+    let repeatClassName = {
+      "fa fa-repeat": this.state.isOnRepeat,
+      "fa fa-circle-o-notch": !this.state.isOnRepeat
+    }
 
     return (
             <div className="player">
@@ -108,6 +116,9 @@ class MusicControl extends Component {
                   <a alt="backward-button" onClick={this.props.playPrev}><i className="fa fa-step-backward" alt="forward-button" aria-hidden="true" ></i></a>
                   <a alt="play-button" id="playButton" onClick={this.props.togglePlay}><i className={toggleClassName(playerClassName)} aria-hidden="true"></i></a>
                   <a alt="forward-button" onClick={this.props.playNext}><i className="fa fa-step-forward" aria-hidden="true"></i></a>
+                  <a alt="repeat-button" onClick={this.toggleRepeatState}> <i className={toggleClassName(repeatClassName)} aria-hidden="true"></i></a>
+                  <a alt="mute-button" onClick={this.toggleMute}><i className={toggleClassName(muteClassName)} aria-hidden="true"></i></a>
+
                 </div>
               <div>
             </div>

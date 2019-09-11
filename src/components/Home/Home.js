@@ -10,6 +10,8 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import './Home.css';
 import Routes from '../../config/routes';
 import Featured from '../Pages/Featured';
+import Artist from '../Artist/Artist';
+import ArtistView from '../Pages/ArtistView';
 class Home extends Component {
   state = {
     isPlaying: false,
@@ -18,7 +20,8 @@ class Home extends Component {
     albums: [],
     song: null,
     currentPlaylist: {Songs:[]},
-    loop: false
+    loop: false,
+    artists:[]
   };
 
   togglePlay = (select) => {
@@ -51,8 +54,9 @@ class Home extends Component {
   getData = async(id) => {
     const songs = await axios.get(`${API_URL}/song/index`)
     const albums = await axios.get(`${API_URL}/album/index`)
+    const artists = await axios.get(`${API_URL}/artist/index`)
     const user = await axios.get(`${API_URL}/auth/show/${id}`)
-    this.setState({songs: songs.data.data, albums: albums.data.data, currentUser:user.data.data})
+    this.setState({songs: songs.data.data, albums: albums.data.data, currentUser:user.data.data,artists:artists.data.data})
   }
 
 // Temp set song descriptions, need to change later
@@ -131,6 +135,11 @@ class Home extends Component {
     this.togglePlay(true);
   }
 
+  renderArtists = () => {
+    let artists = this.state.artists.map( artist => <Artist artist={artist} redirect={this.redirect}/>)
+    return artists;
+  }
+
   redirect = page => {
     this.props.history.push(page);
   }
@@ -143,13 +152,20 @@ class Home extends Component {
           <Route exact path='/search' render={() => <Search songs={this.state.songs} setCurrentSong={this.setCurrentSong} togglePlay={this.togglePlay}
           />} />
           <Route exact path='/playlists' render={() => <PlaylistContainer playPlaylist={this.playPlaylist} redirect={this.redirect}/>} />
-          <Route exact path='/' render={() => <Featured />} />
-          <Route path='/playlist/:id' render={(props)=> <PlaylistView id={props.match.params.id} playPlaylist={this.playPlaylist} redirect={this.redirect}/>} />
+          <Route exact path='/' render={() => <Featured renderArtists={this.renderArtists} />} />
+          <Route path='/playlist/:id' render={(props)=>
+            <PlaylistView id={props.match.params.id} playPlaylist={this.playPlaylist} redirect={this.redirect}
+              setCurrentSong={this.setCurrentSong} togglePlay={this.togglePlay}
+            />} />
+            <Route path='/artist/:id' render={(props)=>
+              <ArtistView id={props.match.params.id} playPlaylist={this.playPlaylist} redirect={this.redirect}
+                setCurrentSong={this.setCurrentSong} togglePlay={this.togglePlay}
+              />} />
         </Switch>
         <div className="music-control-container">
           <MusicPlayerContainer
             isPlaying={this.state.isPlaying} togglePlay={this.togglePlay} song={this.state.song} playNext={this.playNext} playPrev={this.playPrev}
-            toggleLoop={this.toggleLoop}
+            toggleLoop={this.toggleLoop} loop={this.state.loop}
           />
         </div>
       </div>

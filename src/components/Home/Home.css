@@ -58,7 +58,6 @@
     outline: none;
 }
 
-/* playlist card styles */
 .playlist-card {
   display: inline-block;
   padding-bottom: 30px;
@@ -85,4 +84,10 @@ h4 {
 .select-button:hover {
   transform: scale(1.05);
   opacity: 1;
+}
+
+.artist-card {
+  display: inline-block;
+  padding-bottom: 30px;
+  border-radius: 50%;
 }

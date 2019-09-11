@@ -18,6 +18,7 @@ class Featured extends Component{
           <a onClick={()=> this.tabHandling('newReleases')}>New Releases</a>
           <a onClick={()=> this.tabHandling('discover')}>Discover </a>
         </div>
+        {this.props.renderArtists()}
       </div>
     )
   }

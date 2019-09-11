@@ -10,9 +10,10 @@
 }
 
 #playButton {
-  font-size: 20px;
+  font-size: 15px;
 }
 .player {
+  left: -12%;
   margin: 15px 0;
   background: #282828;
   width: 100%;
@@ -35,10 +36,6 @@
   width: 31.8px;
 }
 
-.buttons {
-  display: inline-block;
-}
-
 .audio-controls > .buttons >a:hover {
   opacity: 1;
   color: white;
@@ -47,6 +44,7 @@
 .buttons {
   display: flex;
   justify-content: center;
+  padding-bottom: 0.9375rem;
 }
 
 
