@@ -1,9 +1,9 @@
 # Spotafly
 
-> This solo web application project was built in 9 days for the capstone project in General Assembly.
+This solo web application project was built in 9 days for the capstone project in General Assembly.
 
 ## Project overview 
-> Spotafly is a clone web application of Spotify. It was built with Node Express and Mongodb for back-end and React as front-end. 
+Spotafly is a clone web application of Spotify. It was built with Node Express and Mongodb for back-end and React as front-end. 
 
 # Application
 [Deployed on Heroku ](https://spotafly-app.herokuapp.com)
@@ -19,7 +19,7 @@
 
 ## Things to add in future
 * Implement like feature for songs
-* Improve UI
+* Improve UI and implement mobile responsiveness
 * Allow users to add other users playlist into their collection
 
 
